@@ -8,8 +8,23 @@ namespace Poof
 		{
 			InitializeComponent();
 
-			MainPage = new PoofPage();
-		}
+            var content = new ContentPage
+            {
+                Title = "Poof",
+                Content = new StackLayout
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    Children = {
+                        new Label {
+                            HorizontalTextAlignment = TextAlignment.Center,
+                            Text = "Poof!"
+                        }
+                    }
+                }
+            };
+
+            MainPage = new NavigationPage(content);
+        }
 
 		protected override void OnStart()
 		{
