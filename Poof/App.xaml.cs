@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using FreshMvvm;
+using Poof.Services;
+using Poof.ViewModel;
+using Xamarin.Forms;
 
 namespace Poof
 {
@@ -8,23 +11,13 @@ namespace Poof
 		{
 			InitializeComponent();
 
-            var content = new ContentPage
-            {
-                Title = "Poof",
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Poof!"
-                        }
-                    }
-                }
-            };
+            FreshIOC.Container.Register<IAzureService, AzureService>();
 
-            MainPage = new NavigationPage(content);
-        }
+            var tabbedNavigation = new FreshTabbedNavigationContainer();
+            tabbedNavigation.AddTab<PoofViewModel>("Poof", "");
+            tabbedNavigation.AddTab<PoofListViewModel>("Poof List", "");
+            MainPage = tabbedNavigation;
+		}
 
 		protected override void OnStart()
 		{
