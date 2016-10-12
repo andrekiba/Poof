@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace Poof.iOS
 {
@@ -12,11 +13,20 @@ namespace Poof.iOS
 	{
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
-			global::Xamarin.Forms.Forms.Init();
+			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+			Forms.Init();
 
 			// Code for starting up the Xamarin Test Cloud Agent
 #if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start();
+			//Mapping StyleId to iOS Labels
+			Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) =>
+			{
+				if (null != e.View.StyleId)
+				{
+					e.NativeView.AccessibilityIdentifier = e.View.StyleId;
+				}
+			};
 #endif
 
 			LoadApplication(new App());

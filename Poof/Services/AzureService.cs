@@ -22,6 +22,7 @@ namespace Poof.Services
 
         public MobileServiceClient Client { get; set; }
         public static bool UseAuth { get; set; } = false;
+		public static string DbPath { get; set; } = "syncstore2.db";
 
         #endregion
 
@@ -46,11 +47,9 @@ namespace Poof.Services
             Client = new MobileServiceClient(appUrl);
             #endif
 
-            //InitialzeDatabase for path
-            var path = InitializeDatabase();
-
             //setup our local sqlite store and intialize our table
-            var store = new MobileServiceSQLiteStore(path);
+			SQLitePCL.Batteries.Init();
+			var store = new MobileServiceSQLiteStore(DbPath);
 
             //Define table
             store.DefineTable<Model.Poof>();
@@ -60,28 +59,6 @@ namespace Poof.Services
 
             //Get our sync table that will call out to azure
             poofTable = Client.GetSyncTable<Model.Poof>();
-        }
-
-        private static string InitializeDatabase()
-        {
-            #if __ANDROID__ || __IOS__
-            //if(Device.OS == TargetPlatform.Android || Device.OS == TargetPlatform.iOS)
-                Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
-            #endif
-            SQLitePCL.Batteries.Init();
-
-            const string path = "syncstore2.db";
-
-            #if __ANDROID__
-            path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), path);
-
-            if (!File.Exists(path))
-            {
-                File.Create(path).Dispose();
-            }
-            #endif
-
-            return path;
         }
 
         public async Task<IEnumerable<Model.Poof>> GetPoofs()

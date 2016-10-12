@@ -1,6 +1,6 @@
 ﻿using FreshMvvm;
 using Poof.Services;
-using Poof.ViewModel;
+using Poof.PageModels;
 using Xamarin.Forms;
 
 namespace Poof
@@ -14,8 +14,8 @@ namespace Poof
             FreshIOC.Container.Register<IAzureService, AzureService>();
 
             var tabbedNavigation = new FreshTabbedNavigationContainer();
-            tabbedNavigation.AddTab<PoofViewModel>("Poof", "");
-            tabbedNavigation.AddTab<PoofListViewModel>("Poof List", "");
+			tabbedNavigation.AddTab<PoofPageModel>("Poof", "tab_poof.png");
+			tabbedNavigation.AddTab<PoofListPageModel>("Poof List", "tab_poofList.png");
             MainPage = tabbedNavigation;
 		}
 
