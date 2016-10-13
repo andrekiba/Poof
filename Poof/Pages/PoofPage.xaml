@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Poof.Pages.PoofPage">
+             x:Class="Poof.Pages.PoofPage"
+             BackgroundColor="{StaticResource WhiteSmoke}"
+             Title="Poof">
   <Image Source="poofBig.png" VerticalOptions="Center" HorizontalOptions="Center" />
 </ContentPage>

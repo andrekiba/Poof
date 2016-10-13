@@ -16,6 +16,10 @@ namespace Poof
             var tabbedNavigation = new FreshTabbedNavigationContainer();
 			tabbedNavigation.AddTab<PoofPageModel>("Poof", "tab_poof.png");
 			tabbedNavigation.AddTab<PoofListPageModel>("Poof List", "tab_poofList.png");
+
+            //tabbedNavigation.BarBackgroundColor = (Color)Resources[@"LightGreen"];
+            //tabbedNavigation.BarTextColor = Color.White;
+
             MainPage = tabbedNavigation;
 		}
 

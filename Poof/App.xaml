@@ -10,6 +10,19 @@
       <Color x:Key="NavigationText">White</Color>
       <Color x:Key="LabelSectionText">#6D6D72</Color>
       <Color x:Key="DetailTextColor">#979797</Color>
+
+      <Color x:Key="LightGreen">#91CA47</Color>
+      <Color x:Key="SpiroDiscoBall">#15A9FE</Color>
+      <Color x:Key="MediumTurquoise">#50D2C2</Color>
+      <Color x:Key="DeepFuchsia">#CA4AC2</Color>
+      <Color x:Key="MediumSlateBlue">#796EFF</Color>
+      <Color x:Key="Iris">#4A50CA</Color>
+      <Color x:Key="DarkSlateBlue">#524D93</Color>
+      <Color x:Key="Mustard">#FCDF52</Color>
+      <Color x:Key="WhiteSmoke">#F7F7F7</Color>
+      <Color x:Key="OuterSpace">#464646</Color>
+      <Color x:Key="Liver">#514F52</Color>
+      
     </ResourceDictionary>
 	</Application.Resources>
 </Application>
