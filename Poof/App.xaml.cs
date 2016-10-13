@@ -17,8 +17,8 @@ namespace Poof
 			tabbedNavigation.AddTab<PoofPageModel>("Poof", "tab_poof.png");
 			tabbedNavigation.AddTab<PoofListPageModel>("Poof List", "tab_poofList.png");
 
-            //tabbedNavigation.BarBackgroundColor = (Color)Resources[@"LightGreen"];
-            //tabbedNavigation.BarTextColor = Color.White;
+            tabbedNavigation.BarBackgroundColor = (Color)Resources[@"BarTint"];
+            tabbedNavigation.BarTextColor = (Color)Resources[@"Tint"];
 
             MainPage = tabbedNavigation;
 		}

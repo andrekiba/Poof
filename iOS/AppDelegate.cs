@@ -12,23 +12,48 @@ namespace Poof.iOS
 	[Register("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
-        //private static readonly UIColor TintColor = UIColor.FromRGB(247, 247, 247);
-        private static readonly UIColor BarTintColor = UIColor.FromRGBA(145, 202, 71, 255);
-
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
-            //UINavigationBar.Appearance.BarTintColor = BarTintColor;
-            //UINavigationBar.Appearance.TintColor = UIColor.White;
+            #region Colors
 
-            //UITabBar.Appearance.BarTintColor = BarTintColor;
-            //UITabBar.Appearance.TintColor = UIColor.White;
-            //UITabBar.Appearance.SelectedImageTintColor = UIColor.Green;
+            var tint = UIColor.FromRGB(241, 196, 15); //#F1C40F
+		    var barTint = UIColor.FromRGB(231, 76, 60); //#E74C3C
 
-            //UIBarButtonItem.Appearance.TintColor = TintColor;
-            //UISwitch.Appearance.OnTintColor = TintColor;
-            //UIAlertView.Appearance.TintColor = TintColor;
+            UINavigationBar.Appearance.BarTintColor = barTint; //navigation bar background
+            UINavigationBar.Appearance.TintColor = tint; //navigation bar buttons color
+            UITabBar.Appearance.TintColor = tint;
+            UITabBar.Appearance.BarTintColor = barTint;
+            UISwitch.Appearance.OnTintColor = tint;
+
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
+            {
+                Font = UIFont.FromName("Avenir-Medium", 17f),
+                TextColor = tint
+            });
+
+            //UINavigationBar.Appearance.TitleTextAttributes = new UIStringAttributes
+            //{
+            //    Font = UIFont.FromName("Avenir-Medium", 17f),
+            //    ForegroundColor = tint
+            //};
+
+            //UIBarButtonItem.Appearance.TintColor = tint; //Tint color of button items
+
+            //NavigationBar Buttons 
+            //UIBarButtonItem.Appearance.SetTitleTextAttributes(new UITextAttributes
+            //{
+            //    Font = UIFont.FromName("Avenir-Medium", 17f),
+            //    TextColor = tint
+            //}, UIControlState.Normal);
+
+            ////TabBar
+            //UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
+            //{
+            //    Font = UIFont.FromName("Avenir-Book", 10f)
+            //}, UIControlState.Normal);
 
 
+            #endregion
 
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 			Forms.Init();

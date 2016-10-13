@@ -2,7 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Poof.Pages.PoofPage"
-             BackgroundColor="{StaticResource WhiteSmoke}"
+             BackgroundColor="{StaticResource Back}"
              Title="Poof">
-  <Image Source="poofBig.png" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="2*"/>
+      <RowDefinition Height="0.5*"/>
+      <RowDefinition Height="1.5*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="10*"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <Image Grid.Row="0" Grid.Column="1" Source="poofBig.png" VerticalOptions="Center" HorizontalOptions="Center" />
+
+    <StackLayout Grid.Row="1" Grid.Column="1" Padding="20,0,20,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+      <Label Text="Justified" Style="{StaticResource LabelStyle}" VerticalOptions="Center" HorizontalOptions="Start"/>
+      <Switch VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+    </StackLayout>
+    
+    <StackLayout Grid.Row="2" Grid.Column="1" Padding="20,0,20,20" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+      <Label Text="Comment" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
+      <Frame Padding="3"  HasShadow="False" BackgroundColor="{StaticResource BarTint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Frame Padding="5" HasShadow="False" BackgroundColor="White" >
+          <Editor BackgroundColor="White"/>
+        </Frame>   
+      </Frame>
+    </StackLayout>
+    
+  </Grid>
 </ContentPage>

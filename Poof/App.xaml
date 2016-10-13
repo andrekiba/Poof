@@ -1,9 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Poof.App">
 	<Application.Resources>
 		<!-- Application resource dictionary -->
     <ResourceDictionary>
-      <Color x:Key="Primary">#7635EB</Color>
+
+      <Color x:Key="Tint">#F1C40F</Color>
+      <Color x:Key="BarTint">#E74C3C</Color>
+      <Color x:Key="Back">#F3CE3A</Color>
+      
+      <Color x:Key="Primary">#7A89C2</Color>
       <Color x:Key="PrimaryDark">#5D2ABB</Color>
       <Color x:Key="PrimaryDarkTranslucent">#9926213C</Color>
       <Color x:Key="Accent">#753BE4</Color>
@@ -11,17 +16,20 @@
       <Color x:Key="LabelSectionText">#6D6D72</Color>
       <Color x:Key="DetailTextColor">#979797</Color>
 
-      <Color x:Key="LightGreen">#91CA47</Color>
-      <Color x:Key="SpiroDiscoBall">#15A9FE</Color>
-      <Color x:Key="MediumTurquoise">#50D2C2</Color>
-      <Color x:Key="DeepFuchsia">#CA4AC2</Color>
-      <Color x:Key="MediumSlateBlue">#796EFF</Color>
-      <Color x:Key="Iris">#4A50CA</Color>
-      <Color x:Key="DarkSlateBlue">#524D93</Color>
-      <Color x:Key="Mustard">#FCDF52</Color>
-      <Color x:Key="WhiteSmoke">#F7F7F7</Color>
-      <Color x:Key="OuterSpace">#464646</Color>
-      <Color x:Key="Liver">#514F52</Color>
+      <Style  TargetType="Label" x:Key="LabelStyle">
+        <Setter Property="TextColor" Value="#E74C3C" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontFamily">
+          <Setter.Value>
+            <OnPlatform x:TypeArguments="x:String">
+	            <OnPlatform.iOS>MarkerFelt-Thin</OnPlatform.iOS>
+	            <OnPlatform.Android></OnPlatform.Android>
+	            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+	        </OnPlatform>
+          </Setter.Value>
+        </Setter>
+      </Style>
       
     </ResourceDictionary>
 	</Application.Resources>
