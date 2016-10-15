@@ -32,23 +32,34 @@
             <Entry Placeholder="search for..." PlaceholderColor="White" Text="{Binding Path=SearchText}" TextColor="White" BackgroundColor="Gray"/>
           </Frame>
         </Frame>-->
-        <SearchBar Placeholder="search for..." Text="{Binding Path=SearchText}" BackgroundColor="Gray" CancelButtonColor="White"/>
+        <SearchBar SearchCommand="{Binding SearchPoofsCommand}" Placeholder="search for..." Text="{Binding Path=SearchText}" Style="{StaticResource SearchBarStyle}">
+        </SearchBar>
+        
       </StackLayout>
 
       <ListView Grid.Row="1" x:Name="PoofsView"
-              GroupDisplayBinding="{Binding Key}"
-              IsGroupingEnabled="true"
-              ItemsSource="{Binding PoofsGrouped}"
-              ItemTemplate="{StaticResource PoofTemplateSelector}"
-              SeparatorVisibility="None"
-	  			    IsPullToRefreshEnabled="true"
-              HasUnevenRows="True"
-              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-              RefreshCommand="{Binding LoadPoofsCommand}"
-              ItemSelected="PoofsView_OnItemSelected"
-              ItemTapped="PoofsView_OnItemTapped"
-              BackgroundColor="{StaticResource Back}"
-              >
+          CachingStrategy="RecycleElement"
+          GroupDisplayBinding="{Binding Key}"
+          IsGroupingEnabled="true"
+          ItemsSource="{Binding PoofsGrouped}"
+          ItemTemplate="{StaticResource PoofTemplateSelector}"
+          SeparatorVisibility="None"
+	  		  IsPullToRefreshEnabled="true"
+          HasUnevenRows="True"
+          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+          RefreshCommand="{Binding LoadPoofsCommand}"
+          ItemSelected="PoofsView_OnItemSelected"
+          ItemTapped="PoofsView_OnItemTapped"
+          BackgroundColor="{StaticResource Back}">
+          <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <StackLayout Orientation="Horizontal" Padding="10,5,10,5" BackgroundColor="{StaticResource Back}">
+                  <Label Style="{StaticResource GroupLabelListStyle}" Text="{Binding Key}" />
+                </StackLayout>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.GroupHeaderTemplate>
       </ListView>
       <!--<StackLayout Grid.Row="2" x:Name="OfflineStack" Padding="8" IsVisible="false" BackgroundColor="#F2C500">
         <Label TextColor="White" Text="No Connection - Offline Mode" HorizontalOptions="Center" VerticalOptions="Center"/>

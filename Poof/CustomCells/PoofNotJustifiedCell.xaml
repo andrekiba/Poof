@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Poof.CustomCells.PoofNotJustifiedCell"
@@ -6,7 +6,7 @@
              xmlns:model="clr-namespace:Poof.Model;assembly=Poof"
              xmlns:extensions="clr-namespace:Poof.Extensions;assembly=Poof">
 
-  <Grid ColumnSpacing="2" Padding="5" BindingContext="{DynamicResource Poof}" BackgroundColor="Gray">
+  <Grid ColumnSpacing="2" Padding="10,5,10,5" BindingContext="{DynamicResource Poof}" BackgroundColor="{StaticResource Back}">
 
     <Grid.Resources>
       <ResourceDictionary>
@@ -15,29 +15,29 @@
     </Grid.Resources>
 
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="40"></ColumnDefinition>
       <ColumnDefinition Width="*"></ColumnDefinition>
+      <ColumnDefinition Width="5*"></ColumnDefinition>
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <RowDefinition Height="*"></RowDefinition>
-      <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
-    <plugin:CircleImage
+    <!--<plugin:CircleImage
                       Grid.Row="0"
                       Grid.Column="0"
-                      HeightRequest="35"
-                      WidthRequest="35"
+                      HeightRequest="30"
+                      WidthRequest="30"
                       BorderThickness="2"
-                      BorderColor="{StaticResource Tint}"
+                      BorderColor="{StaticResource Accent}"
                       Aspect="AspectFill"
                       HorizontalOptions="Center"
                       VerticalOptions="Center"
-                      Source="{extensions:ImageResource poofBig.png}" >
-
-    </plugin:CircleImage>
-    <Frame Grid.Row="0" Grid.Column="1" OutlineColor="Transparent" HasShadow="False" Padding="10" BackgroundColor="{StaticResource Accent}">
-      <Label FontSize="Small" TextColor="White" Text="{Binding Comment}" />
+                      Source="poofBig.png"/>-->
+    <Label Grid.Column="0" Text="{Binding TimeDisplay}" Style="{StaticResource TimeLabelListStyle}" TextColor="{StaticResource Accent}"/>
+    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="{StaticResource Accent}" HasShadow="False" Padding="2">
+      <Frame Padding="2" HasShadow="False" BackgroundColor="{StaticResource Accent}" >
+        <Label Text="{Binding Comment}" Style="{StaticResource CommentLabelListStyle}" />
+      </Frame>     
     </Frame>
-    <Label Grid.Row="1" Grid.Column="1" FontSize="Micro" Text="{Binding DateDisplay}" TextColor="White"></Label>
   </Grid>
 </ViewCell>
+

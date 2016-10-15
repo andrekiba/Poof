@@ -30,9 +30,9 @@
     
     <StackLayout Grid.Row="2" Grid.Column="1" Padding="20,0,20,20" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
       <Label Text="Comment" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
-      <Frame Padding="3"  HasShadow="False" BackgroundColor="{StaticResource BarTint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Frame Padding="5" HasShadow="False" BackgroundColor="White" >
-          <Editor Text="{Binding Comment}" BackgroundColor="White"/>
+      <Frame Padding="3" HasShadow="False" BackgroundColor="{StaticResource BarTint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Frame Padding="3" HasShadow="False" BackgroundColor="White" >
+          <Editor Text="{Binding Comment}" Style="{StaticResource EditorStyle}"/>
         </Frame>   
       </Frame>
     </StackLayout>

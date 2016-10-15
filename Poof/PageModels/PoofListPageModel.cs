@@ -59,13 +59,48 @@ namespace Poof.PageModels
                 var poofs = new List<Model.Poof>()
                 {
                     new Model.Poof { Justified = true, Comment = "ciao ciao", DateUtc = DateTime.UtcNow},
+                    new Model.Poof { Justified = false, Comment = "ciao1 ciao1 ciao questo è un commento lungo lungo lungo ciao1 ciao1 ciao questo è un commento lungo lungo lungo", DateUtc = DateTime.UtcNow},
                     new Model.Poof { Justified = false, Comment = "cavolo", DateUtc = DateTime.UtcNow.AddDays(-1)},
                     new Model.Poof { Justified = false, Comment = "pasticcio", DateUtc = DateTime.UtcNow.AddDays(-2)},
                     new Model.Poof { Justified = true, Comment = "ok", DateUtc = DateTime.UtcNow.AddDays(-3)}
                 };
 
+                if(!string.IsNullOrEmpty(SearchText))
+                    poofs = poofs.Where(p => p.Comment.ToLower().Contains(SearchText.ToLower()) || p.DateDisplay.ToLower().Contains(SearchText.ToLower())).ToList();
+
                 Poofs.ReplaceRange(poofs);
 
+                SortPoofs();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("OH NO!" + ex);
+
+                await Application.Current.MainPage.DisplayAlert("Sync Error", "Unable to sync Poofs, you may be offline", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+        }
+
+        private ICommand searchPoofsCommand;
+        public ICommand SearchPoofsCommand => searchPoofsCommand ?? (searchPoofsCommand = new Command(async () => await ExecuteSearchPoofsCommand()));
+        private async Task ExecuteSearchPoofsCommand()
+        {
+            if (IsBusy || !Poofs.Any())
+                return;
+
+            try
+            {
+                LoadingMessage = "Searching Poofs...";
+                IsBusy = true;
+                
+                var poofs = Poofs.Where(p => p.Comment.ToLower().Contains(SearchText.ToLower()) || p.DateDisplay.ToLower().Contains(SearchText.ToLower()));
+
+                Poofs.ReplaceRange(poofs);
                 SortPoofs();
 
             }

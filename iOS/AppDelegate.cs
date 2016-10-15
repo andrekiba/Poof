@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using ImageCircle.Forms.Plugin.iOS;
 using Social;
 using UIKit;
 using Xamarin.Forms;
@@ -74,6 +75,7 @@ namespace Poof.iOS
 
 			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 			Forms.Init();
+			ImageCircleRenderer.Init();
 
 			// Code for starting up the Xamarin Test Cloud Agent
 #if ENABLE_TEST_CLOUD

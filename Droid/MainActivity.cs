@@ -9,6 +9,7 @@ using Android.Widget;
 using Android.OS;
 using Poof.Services;
 using System.IO;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace Poof.Droid
 {
@@ -32,6 +33,7 @@ namespace Poof.Droid
 			}
 
 			global::Xamarin.Forms.Forms.Init(this, bundle);
+			ImageCircleRenderer.Init();
 
 			LoadApplication(new App());
 		}

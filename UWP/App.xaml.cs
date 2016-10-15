@@ -47,6 +47,7 @@ namespace Poof.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Xamarin.Forms.Forms.Init(e);
+				ImageCircleRenderer.Init();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
