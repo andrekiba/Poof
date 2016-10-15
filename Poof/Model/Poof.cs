@@ -15,6 +15,10 @@ namespace Poof.Model
       
         public DateTime DateUtc { get; set; }
 
+        public bool Justified { get; set; }
+
+        public string Comment { get; set; }
+
         [Newtonsoft.Json.JsonIgnore]
         public string DateDisplay => DateUtc.ToLocalTime().ToString("d");
 

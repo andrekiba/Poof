@@ -68,13 +68,16 @@ namespace Poof.Services
             return await poofTable.OrderBy(c => c.DateUtc).ToEnumerableAsync();
         }
 
-        public async Task<Model.Poof> AddPoof()
+        public async Task<Model.Poof> AddPoof(bool justified, string comment, string userId)
         {
             await Initialize();
 
             var poof = new Model.Poof
             {
-                DateUtc = DateTime.UtcNow
+                DateUtc = DateTime.UtcNow,
+                Justified = justified,
+                Comment = comment,
+                UserId = userId
             };
 
             await poofTable.InsertAsync(poof);

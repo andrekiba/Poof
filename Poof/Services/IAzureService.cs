@@ -10,7 +10,7 @@ namespace Poof.Services
     {
         Task<IEnumerable<Model.Poof>> GetPoofs();
 
-        Task<Model.Poof> AddPoof();
+        Task<Model.Poof> AddPoof(bool justified, string comment, string userId);
 
         Task<bool> LoginAsync();
     }

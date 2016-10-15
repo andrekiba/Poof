@@ -12,54 +12,71 @@ namespace Poof.iOS
 	[Register("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
-            #region Colors
+			#region Colors
 
-            var tint = UIColor.FromRGB(241, 196, 15); //#F1C40F
-		    var barTint = UIColor.FromRGB(231, 76, 60); //#E74C3C
+			var tint = UIColor.FromRGB(241, 196, 15); //#F1C40F giallo
+			var barTint = UIColor.FromRGB(231, 76, 60); //#E74C3C rosso
+			var back = UIColor.FromRGB(243, 206, 58); //F3CE3A giallo back
+			var accent = UIColor.FromRGB(52, 152, 219); //#3498DB azzurro
 
-            UINavigationBar.Appearance.BarTintColor = barTint; //navigation bar background
-            UINavigationBar.Appearance.TintColor = tint; //navigation bar buttons color
-            UITabBar.Appearance.TintColor = tint;
-            UITabBar.Appearance.BarTintColor = barTint;
-            UISwitch.Appearance.OnTintColor = tint;
+			//navigation bar
 
-            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
-            {
-                Font = UIFont.FromName("Avenir-Medium", 17f),
-                TextColor = tint
-            });
+			UINavigationBar.Appearance.BarTintColor = barTint; //navigation bar background
+			UINavigationBar.Appearance.TintColor = tint; //navigation bar tint
+			UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
+			{
+				Font = UIFont.FromName("MarkerFelt-Thin", 18f),
+				TextColor = tint
+			});
+			UINavigationBar.Appearance.TitleTextAttributes = new UIStringAttributes
+			{
+			    Font = UIFont.FromName("MarkerFelt-Thin", 18f),
+			    ForegroundColor = tint
+			};
 
-            //UINavigationBar.Appearance.TitleTextAttributes = new UIStringAttributes
-            //{
-            //    Font = UIFont.FromName("Avenir-Medium", 17f),
-            //    ForegroundColor = tint
-            //};
+			//tab bar
 
-            //UIBarButtonItem.Appearance.TintColor = tint; //Tint color of button items
+			UITabBar.Appearance.TintColor = tint;
+			UITabBar.Appearance.BarTintColor = barTint;
+			UITabBar.Appearance.SelectedImageTintColor = tint;
+			UITabBar.Appearance.BackgroundColor = barTint;
 
-            //NavigationBar Buttons 
-            //UIBarButtonItem.Appearance.SetTitleTextAttributes(new UITextAttributes
-            //{
-            //    Font = UIFont.FromName("Avenir-Medium", 17f),
-            //    TextColor = tint
-            //}, UIControlState.Normal);
+			UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
+			{
+				Font = UIFont.FromName("MarkerFelt-Thin", 12f),
+				TextColor = UIColor.White
+				             
+			}, UIControlState.Normal);
+			UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
+			{
+				Font = UIFont.FromName("MarkerFelt-Thin", 12f),
+				TextColor = tint
+			}, UIControlState.Selected);
 
-            ////TabBar
-            //UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
-            //{
-            //    Font = UIFont.FromName("Avenir-Book", 10f)
-            //}, UIControlState.Normal);
+			//bar buttons
 
+			UIBarButtonItem.Appearance.TintColor = tint; //Tint color of button items
+		    UIBarButtonItem.Appearance.SetTitleTextAttributes(new UITextAttributes
+		    {
+		     	Font = UIFont.FromName("MarkerFelt-Thin", 18f),
+		     	TextColor = tint
+		    }, UIControlState.Normal);
 
-            #endregion
+			//switch
 
-            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+			UISwitch.Appearance.OnTintColor = barTint;
+			UISwitch.Appearance.ThumbTintColor = accent;
+			UISwitch.Appearance.TintColor = barTint;
+
+			#endregion
+
+			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 			Forms.Init();
 
 			// Code for starting up the Xamarin Test Cloud Agent
-            #if ENABLE_TEST_CLOUD
+#if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start();
 			//Mapping StyleId to iOS Labels
 			Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) =>
@@ -69,7 +86,7 @@ namespace Poof.iOS
 					e.NativeView.AccessibilityIdentifier = e.View.StyleId;
 				}
 			};
-            #endif
+#endif
 
 			LoadApplication(new App());
 

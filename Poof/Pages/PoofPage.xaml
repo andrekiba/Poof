@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Poof.Pages.PoofPage"
              BackgroundColor="{StaticResource Back}"
-             Title="Poof">
+             Title="Poof"
+             BindingContext="Poof.PageModels.PoofPageModel">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="2*"/>
@@ -16,18 +17,22 @@
       <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
 
-    <Image Grid.Row="0" Grid.Column="1" Source="poofBig.png" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Image x:Name="PoofImage" Grid.Row="0" Grid.Column="1" Source="poofBig.png" IsEnabled="{Binding IsNotBusy}" VerticalOptions="Center" HorizontalOptions="Center">
+    	<Image.GestureRecognizers>
+        	<TapGestureRecognizer Command="{Binding PoofCommand}" Tapped="PoofTapped" NumberOfTapsRequired="1" />
+  		</Image.GestureRecognizers>
+	</Image>
 
     <StackLayout Grid.Row="1" Grid.Column="1" Padding="20,0,20,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
       <Label Text="Justified" Style="{StaticResource LabelStyle}" VerticalOptions="Center" HorizontalOptions="Start"/>
-      <Switch VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+      <Switch IsToggled="{Binding Justified}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
     </StackLayout>
     
     <StackLayout Grid.Row="2" Grid.Column="1" Padding="20,0,20,20" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
       <Label Text="Comment" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
       <Frame Padding="3"  HasShadow="False" BackgroundColor="{StaticResource BarTint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Frame Padding="5" HasShadow="False" BackgroundColor="White" >
-          <Editor BackgroundColor="White"/>
+          <Editor Text="{Binding Comment}" BackgroundColor="White"/>
         </Frame>   
       </Frame>
     </StackLayout>
