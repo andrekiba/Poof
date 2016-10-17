@@ -18,10 +18,10 @@ namespace Poof.Helpers
 
         #region Setting Constants
 
-        private const string UserIdKey = "userid";
+        private const string UserIdKey = "userId";
         private static readonly string UserIdDefault = string.Empty;
 
-        private const string AuthTokenKey = "authtoken";
+        private const string AuthTokenKey = "authToken";
         private static readonly string AuthTokenDefault = string.Empty;
 
         #endregion

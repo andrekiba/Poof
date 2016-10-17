@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using FreshMvvm;
 using MvvmHelpers;
 using Plugin.Connectivity;
+using Poof.Extensions;
 using Poof.Helpers;
 using Poof.Services;
+using PropertyChanged;
 using Xamarin.Forms;
 
 namespace Poof.PageModels
@@ -20,6 +22,8 @@ namespace Poof.PageModels
 
         #region Properties
 
+        [DoNotNotify]
+        public IList<Model.Poof> PoofsBackup { get; private set; }
         public ObservableRangeCollection<Model.Poof> Poofs { get; } = new ObservableRangeCollection<Model.Poof>();
         public ObservableRangeCollection<Grouping<string, Model.Poof>> PoofsGrouped { get; } = new ObservableRangeCollection<Grouping<string, Model.Poof>>();
 
@@ -27,15 +31,39 @@ namespace Poof.PageModels
 
         public string LoadingMessage { get; set; }
 
+        public bool IsOfflineStackVisible { get; set; }
+
         #endregion
 
         #region Constructor
 
         public PoofListPageModel()
         {
+            var search = this
+                .ToObservable(() => SearchText)
+                .Throttle(TimeSpan.FromSeconds(1))
+                .Where(x => x.Length > 2)
+                .Publish();
+
+            var empty = this
+                .ToObservable(() => SearchText)
+                .Throttle(TimeSpan.FromSeconds(1))
+                .Where(x => string.IsNullOrEmpty(x) || x.Length < 3)
+                .Publish();
+
+            search
+                .ObserveOn(SynchronizationContext.Current)
+                .Subscribe(x => ExecuteSearchPoofsCommand());
+
+            empty
+                .ObserveOn(SynchronizationContext.Current)
+                .Subscribe(x => ExecuteRestorePoofsCommand());
+
+            search.Connect();
+            empty.Connect(); 
         }
 
-        public PoofListPageModel(IAzureService azureService)
+        public PoofListPageModel(IAzureService azureService) : this()
         {
             this.azureService = azureService;
         }
@@ -65,10 +93,9 @@ namespace Poof.PageModels
                     new Model.Poof { Justified = true, Comment = "ok", DateUtc = DateTime.UtcNow.AddDays(-3)}
                 };
 
-                if(!string.IsNullOrEmpty(SearchText))
-                    poofs = poofs.Where(p => p.Comment.ToLower().Contains(SearchText.ToLower()) || p.DateDisplay.ToLower().Contains(SearchText.ToLower())).ToList();
+                PoofsBackup = poofs;
 
-                Poofs.ReplaceRange(poofs);
+                FilterPoofs();
 
                 SortPoofs();
 
@@ -77,7 +104,7 @@ namespace Poof.PageModels
             {
                 Debug.WriteLine("OH NO!" + ex);
 
-                await Application.Current.MainPage.DisplayAlert("Sync Error", "Unable to sync Poofs, you may be offline", "OK");
+                await CoreMethods.DisplayAlert("Sync Error", "Unable to sync Poofs, you may be offline", "OK");
             }
             finally
             {
@@ -87,8 +114,8 @@ namespace Poof.PageModels
         }
 
         private ICommand searchPoofsCommand;
-        public ICommand SearchPoofsCommand => searchPoofsCommand ?? (searchPoofsCommand = new Command(async () => await ExecuteSearchPoofsCommand()));
-        private async Task ExecuteSearchPoofsCommand()
+        public ICommand SearchPoofsCommand => searchPoofsCommand ?? (searchPoofsCommand = new Command(ExecuteSearchPoofsCommand));
+        private void ExecuteSearchPoofsCommand()
         {
             if (IsBusy || !Poofs.Any())
                 return;
@@ -97,8 +124,8 @@ namespace Poof.PageModels
             {
                 LoadingMessage = "Searching Poofs...";
                 IsBusy = true;
-                
-                var poofs = Poofs.Where(p => p.Comment.ToLower().Contains(SearchText.ToLower()) || p.DateDisplay.ToLower().Contains(SearchText.ToLower()));
+
+                var poofs = Poofs.Where(p => p.Comment.ToLower().Contains(SearchText.ToLower()) || p.DateDisplay.ToLower().Contains(SearchText.ToLower())).ToList(); 
 
                 Poofs.ReplaceRange(poofs);
                 SortPoofs();
@@ -107,8 +134,6 @@ namespace Poof.PageModels
             catch (Exception ex)
             {
                 Debug.WriteLine("OH NO!" + ex);
-
-                await Application.Current.MainPage.DisplayAlert("Sync Error", "Unable to sync Poofs, you may be offline", "OK");
             }
             finally
             {
@@ -117,6 +142,74 @@ namespace Poof.PageModels
 
         }
 
+        private ICommand restorePoofsCommand;
+        public ICommand RestorePoofsCommand => restorePoofsCommand ?? (restorePoofsCommand = new Command(ExecuteRestorePoofsCommand));
+        private void ExecuteRestorePoofsCommand()
+        {
+            if (IsBusy)
+                return;
+
+            try
+            {
+                LoadingMessage = "Searching Poofs...";
+                IsBusy = true;
+
+                Poofs.ReplaceRange(PoofsBackup);
+                SortPoofs();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("OH NO!" + ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+        }
+
+        private ICommand deletePoofCommand;
+        public ICommand DeletePoofCommand => deletePoofCommand ?? (deletePoofCommand = new Command<Model.Poof>(async poof => await ExecuteDeletePoofCommand(poof)));
+        private async Task ExecuteDeletePoofCommand(Model.Poof poof)
+        {
+            if (IsBusy)
+                return;
+
+            try
+            {
+                LoadingMessage = "Deleting Poof...";
+                IsBusy = true;
+                await azureService.DeletePoof(poof);
+                
+                PoofsBackup.Remove(poof);
+                Poofs.Remove(poof);
+
+                FilterPoofs();
+                SortPoofs();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("OH NO!" + ex);
+
+                await CoreMethods.DisplayAlert("Sync Error", "Unable to sync Poofs, you may be offline", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+        }
+
+        private void FilterPoofs()
+        {
+            if (string.IsNullOrEmpty(SearchText) || SearchText.Length <= 2)
+                return;
+
+            var poofs = Poofs.Where(p => p.Comment.ToLower().Contains(SearchText.ToLower()) || p.DateDisplay.ToLower().Contains(SearchText.ToLower())).ToList();
+            Poofs.ReplaceRange(poofs);
+        }
         private void SortPoofs()
         {
             var groups = from poof in Poofs
@@ -130,8 +223,8 @@ namespace Poof.PageModels
 
         public Task<bool> LoginAsync()
         {
-            return Task.FromResult(true);
-            //return Settings.IsLoggedIn ? Task.FromResult(true) : azureService.LoginAsync();
+            //return Task.FromResult(true);
+            return Settings.IsLoggedIn ? Task.FromResult(true) : azureService.LoginAsync();
         }
 
         #endregion
@@ -152,7 +245,7 @@ namespace Poof.PageModels
             }
 
             CrossConnectivity.Current.ConnectivityChanged += ConnecitvityChanged;
-            //OfflineStack.IsVisible = !CrossConnectivity.Current.IsConnected;
+           IsOfflineStackVisible = !CrossConnectivity.Current.IsConnected;
 
             if (Poofs.Count == 0 && Settings.IsLoggedIn)
                 LoadPoofsCommand.Execute(null);
@@ -175,11 +268,11 @@ namespace Poof.PageModels
             
         }
 
-        private static void ConnecitvityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
+        private void ConnecitvityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                //OfflineStack.IsVisible = !e.IsConnected;
+                IsOfflineStackVisible = !e.IsConnected;
             });
         }
 

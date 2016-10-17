@@ -12,6 +12,8 @@ namespace Poof.Services
 
         Task<Model.Poof> AddPoof(bool justified, string comment, string userId);
 
+        Task DeletePoof(Model.Poof poof);
+
         Task<bool> LoginAsync();
     }
 }

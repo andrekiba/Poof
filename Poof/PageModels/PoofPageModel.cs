@@ -36,20 +36,22 @@ namespace Poof.PageModels
         public ICommand PoofCommand => poofCommand ?? (poofCommand = new Command(async () => await ExecutePoofCommand()));
         private async Task ExecutePoofCommand()
         {
-            if (IsBusy || !(await LoginAsync()))
-                return;
-
             try
             {
+                if (IsBusy || !(await LoginAsync()))
+                    return;
+
                 LoadingMessage = "Adding Poof...";
                 IsBusy = true;
 
-                //var poof = await azureService.AddPoof(Justified, Comment, Settings.UserId);
+                var poof = await azureService.AddPoof(Justified, Comment, Settings.UserId);
  
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("OH NO!" + ex);
+
+                await CoreMethods.DisplayAlert("Service Error", ex.Message, "OK");
             }
             finally
             {
@@ -61,8 +63,8 @@ namespace Poof.PageModels
 
         public Task<bool> LoginAsync()
         {
-            return Task.FromResult(true);
-            //return Settings.IsLoggedIn ? Task.FromResult(true) : azureService.LoginAsync();
+            //return Task.FromResult(true);
+            return Settings.IsLoggedIn ? Task.FromResult(true) : azureService.LoginAsync();
         }
 
         #endregion 

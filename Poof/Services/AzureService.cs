@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define AUTH
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -87,6 +89,15 @@ namespace Poof.Services
             return poof;
         }
 
+        public async Task DeletePoof(Model.Poof poof)
+        {
+            await Initialize();
+
+            await poofTable.DeleteAsync(poof);
+            
+            await SyncPoof();
+        }
+
         public async Task SyncPoof()
         {
             try
@@ -94,7 +105,7 @@ namespace Poof.Services
                 if (!CrossConnectivity.Current.IsConnected)
                     return;
 
-                //pull down all latest changes and then push current coffees up
+                //pull down all latest changes and then push current poofs up
                 await Client.SyncContext.PushAsync();
                 await poofTable.PullAsync("allPoofs", poofTable.CreateQuery());
             }

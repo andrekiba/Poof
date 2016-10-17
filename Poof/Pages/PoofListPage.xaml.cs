@@ -18,16 +18,11 @@ namespace Poof.Pages
                 if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
                     PoofsView.SelectedItem = null;
             };
-        }
 
-        private void PoofsView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            PoofsView.SelectedItem = null;
-        }
-
-        private void PoofsView_OnItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            PoofsView.SelectedItem = null;
+            PoofsView.ItemSelected += (sender, e) =>
+            {
+                PoofsView.SelectedItem = null;
+            };
         }
     }
 }

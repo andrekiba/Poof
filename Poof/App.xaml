@@ -94,6 +94,21 @@
         </Setter>
       </Style>
 
+      <Style TargetType="Entry" x:Key="SearchEntryStyle">
+        <Setter Property="TextColor" Value="{StaticResource Jet}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Back}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily">
+          <Setter.Value>
+            <OnPlatform x:TypeArguments="x:String">
+              <OnPlatform.iOS>MarkerFelt-Thin</OnPlatform.iOS>
+              <OnPlatform.Android>Droid Sans Mono</OnPlatform.Android>
+              <OnPlatform.WinPhone>Comic Sans MS</OnPlatform.WinPhone>
+            </OnPlatform>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
     </ResourceDictionary>
   </Application.Resources>
 </Application>
