@@ -1,8 +1,9 @@
-﻿//#define AUTH
+﻿#define AUTH
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
@@ -23,7 +24,7 @@ namespace Poof.Services
         #region Properties
 
         public MobileServiceClient Client { get; set; }
-        public static bool UseAuth { get; set; } = false;
+        public static bool UseAuth { get; set; } = true;
 		public static string DbPath { get; set; } = "syncstore2.db";
 
         #endregion
@@ -107,7 +108,7 @@ namespace Poof.Services
 
                 //pull down all latest changes and then push current poofs up
                 await Client.SyncContext.PushAsync();
-                await poofTable.PullAsync("allPoofs", poofTable.CreateQuery());
+                await poofTable.PullAsync("allPoofs" + Settings.UserId, poofTable.Where(p => p.UserId == Settings.UserId));
             }
             catch (Exception ex)
             {
@@ -122,7 +123,7 @@ namespace Poof.Services
 
             var auth = DependencyService.Get<IAuthentication>();
             var user = await auth.LoginAsync(Client, MobileServiceAuthenticationProvider.Google);
-
+            
             if (user == null)
             {
                 Settings.AuthToken = string.Empty;
@@ -134,10 +135,28 @@ namespace Poof.Services
                 return false;
             }
 
+            //var socialLoginResult = await GetUserData();
+            
             Settings.AuthToken = user.MobileServiceAuthenticationToken;
             Settings.UserId = user.UserId;
 
             return true;
         }
+
+        private async Task<SocialLoginResult> GetUserData()
+        {
+            return await Client.InvokeApiAsync<SocialLoginResult>("getextrauserinfo", HttpMethod.Get, null);
+        }
     }
+
+    public class SocialLoginResult
+    {
+        public string SocialId => string.IsNullOrEmpty(Sub) ? Id : Sub;
+
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string Sub { get; set; }
+        public string Id { get; set; }
+    }
+
 }

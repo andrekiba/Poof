@@ -238,6 +238,7 @@
     <BundleResource Include="Resources\tab_poofList_w%403x.png" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\SocialAuthiOS.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />

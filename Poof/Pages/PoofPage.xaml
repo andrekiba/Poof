@@ -5,37 +5,49 @@
              BackgroundColor="{StaticResource Back}"
              Title="Poof"
              BindingContext="Poof.PageModels.PoofPageModel">
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="2*"/>
-      <RowDefinition Height="0.5*"/>
-      <RowDefinition Height="1.5*"/>
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*"/>
-      <ColumnDefinition Width="10*"/>
-      <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
+  <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+    <Grid AbsoluteLayout.LayoutFlags="All"
+          AbsoluteLayout.LayoutBounds="0,0,1,1"
+          BackgroundColor="{StaticResource Back}">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="2*"/>
+        <RowDefinition Height="0.5*"/>
+        <RowDefinition Height="1.5*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="10*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
 
-    <Image x:Name="PoofImage" Grid.Row="0" Grid.Column="1" Source="poofBig.png" IsEnabled="{Binding IsNotBusy}" VerticalOptions="Center" HorizontalOptions="Center">
-    	<Image.GestureRecognizers>
-        	<TapGestureRecognizer Command="{Binding PoofCommand}" Tapped="PoofTapped" NumberOfTapsRequired="1" />
-  		</Image.GestureRecognizers>
-	</Image>
+      <Image x:Name="PoofImage" Grid.Row="0" Grid.Column="1" Source="poofBig.png" IsEnabled="{Binding IsNotBusy}" VerticalOptions="Center" HorizontalOptions="Center">
+    	  <Image.GestureRecognizers>
+        	  <TapGestureRecognizer Command="{Binding PoofCommand}" Tapped="PoofTapped" NumberOfTapsRequired="1" />
+  		  </Image.GestureRecognizers>
+	  </Image>
 
-    <StackLayout Grid.Row="1" Grid.Column="1" Padding="20,0,20,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-      <Label Text="Justified" Style="{StaticResource LabelStyle}" VerticalOptions="Center" HorizontalOptions="Start"/>
-      <Switch IsToggled="{Binding Justified}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
-    </StackLayout>
+      <StackLayout Grid.Row="1" Grid.Column="1" Padding="20,0,20,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+        <Label Text="Justified" Style="{StaticResource LabelStyle}" VerticalOptions="Center" HorizontalOptions="Start"/>
+        <Switch IsToggled="{Binding Justified}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+      </StackLayout>
     
-    <StackLayout Grid.Row="2" Grid.Column="1" Padding="20,0,20,20" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-      <Label Text="Comment" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
-      <Frame Padding="3" HasShadow="False" BackgroundColor="{StaticResource BarTint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Frame Padding="3" HasShadow="False" BackgroundColor="White" >
-          <Editor Text="{Binding Comment}" Style="{StaticResource EditorStyle}"/>
-        </Frame>   
-      </Frame>
-    </StackLayout>
+      <StackLayout Grid.Row="2" Grid.Column="1" Padding="20,0,20,20" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Label Text="Comment" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
+        <Frame Padding="3" HasShadow="False" BackgroundColor="{StaticResource BarTint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+          <Frame Padding="3" HasShadow="False" BackgroundColor="White" >
+            <Editor Text="{Binding Comment}" Style="{StaticResource EditorStyle}"/>
+          </Frame>   
+        </Frame>
+      </StackLayout>
     
-  </Grid>
+    </Grid>
+    <StackLayout IsVisible="{Binding IsBusy}"
+                   Padding="32"
+                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                   AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                   BackgroundColor="{StaticResource JetTransparent}">
+      <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource BarTint}"/>
+      <Label Text="{Binding LoadingMessage}" HorizontalOptions="Center" Style="{StaticResource LabelStyle}"/>
+    </StackLayout>
+  </AbsoluteLayout>
 </ContentPage>

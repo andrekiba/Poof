@@ -37,8 +37,10 @@ namespace Poof.PageModels
 
         #region Constructor
 
-        public PoofListPageModel()
+        public PoofListPageModel(IAzureService azureService)
         {
+            this.azureService = azureService;
+
             var search = this
                 .ToObservable(() => SearchText)
                 .Throttle(TimeSpan.FromSeconds(1))
@@ -60,12 +62,7 @@ namespace Poof.PageModels
                 .Subscribe(x => ExecuteRestorePoofsCommand());
 
             search.Connect();
-            empty.Connect(); 
-        }
-
-        public PoofListPageModel(IAzureService azureService) : this()
-        {
-            this.azureService = azureService;
+            empty.Connect();
         }
 
         #endregion
@@ -83,17 +80,18 @@ namespace Poof.PageModels
             {
                 LoadingMessage = "Loading Poofs...";
                 IsBusy = true;
-                //var poofs = await azureService.GetPoofs();
-                var poofs = new List<Model.Poof>()
-                {
-                    new Model.Poof { Justified = true, Comment = "ciao ciao", DateUtc = DateTime.UtcNow},
-                    new Model.Poof { Justified = false, Comment = "ciao1 ciao1 ciao questo è un commento lungo lungo lungo ciao1 ciao1 ciao questo è un commento lungo lungo lungo", DateUtc = DateTime.UtcNow},
-                    new Model.Poof { Justified = false, Comment = "cavolo", DateUtc = DateTime.UtcNow.AddDays(-1)},
-                    new Model.Poof { Justified = false, Comment = "pasticcio", DateUtc = DateTime.UtcNow.AddDays(-2)},
-                    new Model.Poof { Justified = true, Comment = "ok", DateUtc = DateTime.UtcNow.AddDays(-3)}
-                };
+                var poofs = await azureService.GetPoofs();
+                //var poofs = new List<Model.Poof>()
+                //{
+                //    new Model.Poof { Justified = true, Comment = "ciao ciao", DateUtc = DateTime.UtcNow},
+                //    new Model.Poof { Justified = false, Comment = "ciao1 ciao1 ciao questo è un commento lungo lungo lungo ciao1 ciao1 ciao questo è un commento lungo lungo lungo", DateUtc = DateTime.UtcNow},
+                //    new Model.Poof { Justified = false, Comment = "cavolo", DateUtc = DateTime.UtcNow.AddDays(-1)},
+                //    new Model.Poof { Justified = false, Comment = "pasticcio", DateUtc = DateTime.UtcNow.AddDays(-2)},
+                //    new Model.Poof { Justified = true, Comment = "ok", DateUtc = DateTime.UtcNow.AddDays(-3)}
+                //};
 
-                PoofsBackup = poofs;
+                //PoofsBackup = poofs.ToList();
+                Poofs.ReplaceRange(poofs);
 
                 FilterPoofs();
 
@@ -125,9 +123,7 @@ namespace Poof.PageModels
                 LoadingMessage = "Searching Poofs...";
                 IsBusy = true;
 
-                var poofs = Poofs.Where(p => p.Comment.ToLower().Contains(SearchText.ToLower()) || p.DateDisplay.ToLower().Contains(SearchText.ToLower())).ToList(); 
-
-                Poofs.ReplaceRange(poofs);
+                FilterPoofs();
                 SortPoofs();
 
             }
@@ -143,8 +139,8 @@ namespace Poof.PageModels
         }
 
         private ICommand restorePoofsCommand;
-        public ICommand RestorePoofsCommand => restorePoofsCommand ?? (restorePoofsCommand = new Command(ExecuteRestorePoofsCommand));
-        private void ExecuteRestorePoofsCommand()
+        public ICommand RestorePoofsCommand => restorePoofsCommand ?? (restorePoofsCommand = new Command(async () => await ExecuteRestorePoofsCommand()));
+        private async Task ExecuteRestorePoofsCommand()
         {
             if (IsBusy)
                 return;
@@ -154,7 +150,9 @@ namespace Poof.PageModels
                 LoadingMessage = "Searching Poofs...";
                 IsBusy = true;
 
-                Poofs.ReplaceRange(PoofsBackup);
+                var poofs = await azureService.GetPoofs();
+                //Poofs.ReplaceRange(PoofsBackup);
+                Poofs.ReplaceRange(poofs);
                 SortPoofs();
 
             }
@@ -181,8 +179,8 @@ namespace Poof.PageModels
                 LoadingMessage = "Deleting Poof...";
                 IsBusy = true;
                 await azureService.DeletePoof(poof);
-                
-                PoofsBackup.Remove(poof);
+
+                //PoofsBackup.Remove(poof);
                 Poofs.Remove(poof);
 
                 FilterPoofs();

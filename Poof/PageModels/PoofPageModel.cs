@@ -33,19 +33,24 @@ namespace Poof.PageModels
         #region Commands
 
         private ICommand poofCommand;
-        public ICommand PoofCommand => poofCommand ?? (poofCommand = new Command(async () => await ExecutePoofCommand()));
+        public ICommand PoofCommand => poofCommand ?? (poofCommand = new Command(async () => await ExecutePoofCommand(), () => !IsBusy));
         private async Task ExecutePoofCommand()
         {
             try
             {
-                if (IsBusy || !(await LoginAsync()))
+                if (!await LoginAsync())
                     return;
 
                 LoadingMessage = "Adding Poof...";
                 IsBusy = true;
 
+                await Task.Delay(4000);
+
                 var poof = await azureService.AddPoof(Justified, Comment, Settings.UserId);
- 
+
+                Comment = null;
+                Justified = false;
+
             }
             catch (Exception ex)
             {
