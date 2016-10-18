@@ -44,7 +44,7 @@ namespace Poof.PageModels
             var search = this
                 .ToObservable(() => SearchText)
                 .Throttle(TimeSpan.FromSeconds(1))
-                .Where(x => x.Length > 2)
+                .Where(x => !string.IsNullOrEmpty(x) && x.Length > 2)
                 .Publish();
 
             var empty = this
@@ -59,7 +59,7 @@ namespace Poof.PageModels
 
             empty
                 .ObserveOn(SynchronizationContext.Current)
-                .Subscribe(x => ExecuteRestorePoofsCommand());
+				.Subscribe(async (x) => await ExecuteRestorePoofsCommand());
 
             search.Connect();
             empty.Connect();
@@ -205,7 +205,7 @@ namespace Poof.PageModels
             if (string.IsNullOrEmpty(SearchText) || SearchText.Length <= 2)
                 return;
 
-            var poofs = Poofs.Where(p => p.Comment.ToLower().Contains(SearchText.ToLower()) || p.DateDisplay.ToLower().Contains(SearchText.ToLower())).ToList();
+			var poofs = Poofs.Where(p => (!string.IsNullOrEmpty(p.Comment) && p.Comment.ToLower().Contains(SearchText.ToLower())) || p.DateDisplay.ToLower().Contains(SearchText.ToLower())).ToList();
             Poofs.ReplaceRange(poofs);
         }
         private void SortPoofs()

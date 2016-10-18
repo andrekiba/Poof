@@ -10,6 +10,7 @@
       <Color x:Key="Accent">#3498DB</Color>
       <Color x:Key="Jet">#343330</Color>
       <Color x:Key="JetTransparent">#80343330</Color>
+	  <Color x:Key="WhiteSmoke">#F7F7F7</Color>
 
       <!--<Color x:Key="Primary">#7A89C2</Color>
       <Color x:Key="PrimaryDark">#5D2ABB</Color>
@@ -46,13 +47,18 @@
       <Style TargetType="Label" x:Key="CommentLabelListStyle" BasedOn="{StaticResource BaseLabelStyle}">
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
-        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="FontSize" Value="Medium" />
         <Setter Property="FontAttributes" Value="None" />
+		<Style.Triggers>
+            <Trigger TargetType="Label" Property="Text" Value="{x:Null}">
+             	<Setter Property="IsVisible" Value="false" />
+            </Trigger>
+        </Style.Triggers>
       </Style>
 
       <Style TargetType="Label" x:Key="TimeLabelListStyle" BasedOn="{StaticResource BaseLabelStyle}">
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="Micro" />
+        <Setter Property="FontSize" Value="Medium" />
         <Setter Property="FontAttributes" Value="None" />
       </Style>
       
@@ -60,7 +66,7 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
         <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
-        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="FontSize" Value="Medium" />
         <Setter Property="FontAttributes" Value="None" />
       </Style>
 
