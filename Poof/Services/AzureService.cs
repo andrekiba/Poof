@@ -71,7 +71,9 @@ namespace Poof.Services
             if(sync)
                 await SyncPoof();
 
-            return await poofTable.OrderBy(c => c.DateUtc).ToEnumerableAsync();
+            return await poofTable
+                        .Where(p => p.UserId == Settings.UserId && p.DateUtc >= DateTime.UtcNow.Date.AddDays(-7))
+                        .OrderBy(c => c.DateUtc).ToEnumerableAsync();
         }
 
         public async Task<Model.Poof> AddPoof(bool justified, string comment, string userId, bool sync = false)
@@ -113,7 +115,7 @@ namespace Poof.Services
 
                 //pull down all latest changes and then push current poofs up
                 await Client.SyncContext.PushAsync();
-                await poofTable.PullAsync("allPoofs" + Settings.UserId, poofTable.Where(p => p.UserId == Settings.UserId && p.DateUtc >= DateTime.UtcNow.Date.AddDays(-7)));
+                await poofTable.PullAsync("allPoofs" + Settings.UserId, poofTable.CreateQuery());
             }
             catch (Exception ex)
             {

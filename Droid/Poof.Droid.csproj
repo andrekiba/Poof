@@ -27,19 +27,20 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-<JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
-<AndroidSupportedAbis>armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
-    <DebugType></DebugType>
+    <DebugType>
+    </DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-<AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FreshIOC, Version=1.0.6071.17008, Culture=neutral, processorArchitecture=MSIL">
@@ -214,6 +215,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
+    <AndroidResource Include="Resources\drawable\poofIcon.png" />
+    <AndroidResource Include="Resources\drawable\tab_poof.png" />
+    <AndroidResource Include="Resources\drawable\tab_poof_w.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\poofIcon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tab_poof.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\tab_poof_w.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\poofIcon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tab_poof.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\tab_poof_w.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\poofIcon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tab_poof.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\tab_poof_w.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\poofIcon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\tab_poof.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\tab_poof_w.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
