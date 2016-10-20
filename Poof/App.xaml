@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Poof.App">
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:vm="clr-namespace:Poof.PageModels;assembly=Poof"
+             x:Class="Poof.App">
   <Application.Resources>
     <!-- Application resource dictionary -->
     <ResourceDictionary>
@@ -10,7 +13,8 @@
       <Color x:Key="Accent">#3498DB</Color>
       <Color x:Key="Jet">#343330</Color>
       <Color x:Key="JetTransparent">#80343330</Color>
-	  <Color x:Key="WhiteSmoke">#F7F7F7</Color>
+      <Color x:Key="Taupe">#908F8E</Color>
+      <Color x:Key="WhiteSmoke">#F7F7F7</Color>
 
       <!--<Color x:Key="Primary">#7A89C2</Color>
       <Color x:Key="PrimaryDark">#5D2ABB</Color>
@@ -19,7 +23,7 @@
       <Color x:Key="NavigationText">White</Color>
       <Color x:Key="LabelSectionText">#6D6D72</Color>
       <Color x:Key="DetailTextColor">#979797</Color>-->
-      
+
       <Style TargetType="Label" x:Key="BaseLabelStyle" >
         <Setter Property="FontFamily">
           <Setter.Value>
@@ -31,7 +35,7 @@
           </Setter.Value>
         </Setter>
       </Style>
-        
+
       <Style  TargetType="Label" x:Key="LabelStyle" BasedOn="{StaticResource BaseLabelStyle}">
         <Setter Property="TextColor" Value="#E74C3C" />
         <Setter Property="FontSize" Value="25" />
@@ -47,21 +51,17 @@
       <Style TargetType="Label" x:Key="CommentLabelListStyle" BasedOn="{StaticResource BaseLabelStyle}">
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
+        <Setter Property="LineBreakMode" Value="TailTruncation"/>
         <Setter Property="FontSize" Value="Medium" />
         <Setter Property="FontAttributes" Value="None" />
-		<Style.Triggers>
-            <Trigger TargetType="Label" Property="Text" Value="{x:Null}">
-             	<Setter Property="IsVisible" Value="false" />
-            </Trigger>
-        </Style.Triggers>
       </Style>
 
       <Style TargetType="Label" x:Key="TimeLabelListStyle" BasedOn="{StaticResource BaseLabelStyle}">
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="FontSize" Value="Small" />
         <Setter Property="FontAttributes" Value="None" />
       </Style>
-      
+
       <Style TargetType="Label" x:Key="GroupLabelListStyle" BasedOn="{StaticResource BaseLabelStyle}">
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
@@ -84,10 +84,10 @@
           </Setter.Value>
         </Setter>
       </Style>
-      
+
       <Style TargetType="SearchBar" x:Key="SearchBarStyle">
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
-        <Setter Property="BackgroundColor" Value="{StaticResource Back}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Taupe}" />
         <Setter Property="CancelButtonColor" Value="White" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="FontFamily">
@@ -115,6 +115,9 @@
           </Setter.Value>
         </Setter>
       </Style>
+
+
+      <vm:PoofListPageModel x:Key="PoofListPageModel" />
 
     </ResourceDictionary>
   </Application.Resources>

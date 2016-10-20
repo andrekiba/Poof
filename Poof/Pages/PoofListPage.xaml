@@ -10,14 +10,14 @@
   <ContentPage.Resources>
     <ResourceDictionary>
       <sel:PoofTemplateSelector x:Key="PoofTemplateSelector"/>
+      <vm:PoofListPageModel x:Key="PoofListPageModel"/>
     </ResourceDictionary>
   </ContentPage.Resources>
 
-  <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-    <Grid AbsoluteLayout.LayoutFlags="All"
-          AbsoluteLayout.LayoutBounds="0,0,1,1"
-          BackgroundColor="{StaticResource Back}">
-
+  <!--<AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">-->
+    <!--<Grid AbsoluteLayout.LayoutFlags="All"
+          AbsoluteLayout.LayoutBounds="0,0,1,1">-->
+    <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="*"/>
@@ -30,7 +30,7 @@
           </Frame>
         </Frame>-->
         <SearchBar SearchCommand="{Binding SearchPoofsCommand}" Placeholder="search for..." Text="{Binding SearchText}" Style="{StaticResource SearchBarStyle}"/>
-     
+
       </StackLayout>
 
       <ListView Grid.Row="1" x:Name="PoofsView"
@@ -40,20 +40,20 @@
           ItemsSource="{Binding PoofsGrouped}"
           ItemTemplate="{StaticResource PoofTemplateSelector}"
           SeparatorVisibility="None"
-	  	  IsPullToRefreshEnabled="true"
+	  	    IsPullToRefreshEnabled="true"
           HasUnevenRows="True"
           IsRefreshing="{Binding IsBusy, Mode=OneWay}"
           RefreshCommand="{Binding LoadPoofsCommand}"
           BackgroundColor="{StaticResource Back}">
-          <ListView.GroupHeaderTemplate>
-            <DataTemplate>
-              <ViewCell>
-                <StackLayout Orientation="Horizontal" Padding="10,5,10,5" BackgroundColor="{StaticResource Back}">
-                  <Label Style="{StaticResource GroupLabelListStyle}" Text="{Binding Key}" />
-                </StackLayout>
-              </ViewCell>
-            </DataTemplate>
-          </ListView.GroupHeaderTemplate>
+        <ListView.GroupHeaderTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <StackLayout Orientation="Horizontal" Padding="10,5,10,5" BackgroundColor="{StaticResource Back}">
+                <Label Style="{StaticResource GroupLabelListStyle}" Text="{Binding Key}" />
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.GroupHeaderTemplate>
       </ListView>
       <!--<StackLayout Grid.Row="1" x:Name="OfflineStack" IsVisible="{Binding IsOfflineStackVisible}" Padding="8" BackgroundColor="{StaticResource Back}">
         <Label Style="{StaticResource LabelStyle}" Text="No Connection - Offline Mode" HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -67,5 +67,5 @@
       <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource BarTint}"/>
       <Label Text="{Binding LoadingMessage}" HorizontalOptions="Center" Style="{StaticResource LabelStyle}"/>
     </StackLayout>-->
-  </AbsoluteLayout>
+  <!--</AbsoluteLayout>-->
 </ContentPage>

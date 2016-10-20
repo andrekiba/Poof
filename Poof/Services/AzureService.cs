@@ -64,14 +64,17 @@ namespace Poof.Services
             poofTable = Client.GetSyncTable<Model.Poof>();
         }
 
-        public async Task<IEnumerable<Model.Poof>> GetPoofs()
+        public async Task<IEnumerable<Model.Poof>> GetPoofs(bool sync = false)
         {
             await Initialize();
-            await SyncPoof();
+
+            if(sync)
+                await SyncPoof();
+
             return await poofTable.OrderBy(c => c.DateUtc).ToEnumerableAsync();
         }
 
-        public async Task<Model.Poof> AddPoof(bool justified, string comment, string userId)
+        public async Task<Model.Poof> AddPoof(bool justified, string comment, string userId, bool sync = false)
         {
             await Initialize();
 
@@ -79,24 +82,26 @@ namespace Poof.Services
             {
                 DateUtc = DateTime.UtcNow,
                 Justified = justified,
-                Comment = comment,
+                Comment = string.IsNullOrWhiteSpace(comment) ? "..." : comment,
                 UserId = userId
             };
 
             await poofTable.InsertAsync(poof);
 
-            await SyncPoof();
+            if(sync)
+                await SyncPoof();
 
             return poof;
         }
 
-        public async Task DeletePoof(Model.Poof poof)
+        public async Task DeletePoof(Model.Poof poof, bool sync = false)
         {
             await Initialize();
 
             await poofTable.DeleteAsync(poof);
-            
-            await SyncPoof();
+
+            if(sync)
+                await SyncPoof();
         }
 
         public async Task SyncPoof()
@@ -108,7 +113,7 @@ namespace Poof.Services
 
                 //pull down all latest changes and then push current poofs up
                 await Client.SyncContext.PushAsync();
-                await poofTable.PullAsync("allPoofs" + Settings.UserId, poofTable.Where(p => p.UserId == Settings.UserId));
+                await poofTable.PullAsync("allPoofs" + Settings.UserId, poofTable.Where(p => p.UserId == Settings.UserId && p.DateUtc >= DateTime.UtcNow.Date.AddDays(-7)));
             }
             catch (Exception ex)
             {

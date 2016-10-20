@@ -7,8 +7,7 @@
              BindingContext="Poof.PageModels.PoofPageModel">
   <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
     <Grid AbsoluteLayout.LayoutFlags="All"
-          AbsoluteLayout.LayoutBounds="0,0,1,1"
-          BackgroundColor="{StaticResource Back}">
+          AbsoluteLayout.LayoutBounds="0,0,1,1">
       <Grid.RowDefinitions>
         <RowDefinition Height="0.5*"/>
         <RowDefinition Height="1.5*"/>
@@ -28,8 +27,8 @@
     
       <StackLayout Grid.Row="1" Grid.Column="1" Padding="20,20,20,0" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Label Text="Comment" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
-        <Frame Padding="3" HasShadow="False" BackgroundColor="{StaticResource BarTint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-          <Frame Padding="3" HasShadow="False" BackgroundColor="White" >
+        <Frame Padding="2" HasShadow="False" BackgroundColor="{StaticResource BarTint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+          <Frame Padding="2" HasShadow="False" BackgroundColor="{StaticResource BarTint}">
             <Editor Text="{Binding Comment}" Style="{StaticResource EditorStyle}"/>
           </Frame>   
         </Frame>

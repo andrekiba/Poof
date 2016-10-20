@@ -18,12 +18,10 @@ namespace Poof.PageModels
 {
     public class PoofListPageModel : BasePageModel
     {
-        private readonly IAzureService azureService;
+        private readonly AzureService azureService;
 
         #region Properties
 
-        [DoNotNotify]
-        public IList<Model.Poof> PoofsBackup { get; private set; }
         public ObservableRangeCollection<Model.Poof> Poofs { get; } = new ObservableRangeCollection<Model.Poof>();
         public ObservableRangeCollection<Grouping<string, Model.Poof>> PoofsGrouped { get; } = new ObservableRangeCollection<Grouping<string, Model.Poof>>();
 
@@ -37,9 +35,9 @@ namespace Poof.PageModels
 
         #region Constructor
 
-        public PoofListPageModel(IAzureService azureService)
+        public PoofListPageModel()
         {
-            this.azureService = azureService;
+            this.azureService = new AzureService();
 
             var search = this
                 .ToObservable(() => SearchText)
@@ -80,7 +78,7 @@ namespace Poof.PageModels
             {
                 LoadingMessage = "Loading Poofs...";
                 IsBusy = true;
-                var poofs = await azureService.GetPoofs();
+                var poofs = await azureService.GetPoofs(true);
                 //var poofs = new List<Model.Poof>()
                 //{
                 //    new Model.Poof { Justified = true, Comment = "ciao ciao", DateUtc = DateTime.UtcNow},
@@ -89,8 +87,7 @@ namespace Poof.PageModels
                 //    new Model.Poof { Justified = false, Comment = "pasticcio", DateUtc = DateTime.UtcNow.AddDays(-2)},
                 //    new Model.Poof { Justified = true, Comment = "ok", DateUtc = DateTime.UtcNow.AddDays(-3)}
                 //};
-
-                //PoofsBackup = poofs.ToList();
+              
                 Poofs.ReplaceRange(poofs);
 
                 FilterPoofs();
@@ -151,8 +148,8 @@ namespace Poof.PageModels
                 IsBusy = true;
 
                 var poofs = await azureService.GetPoofs();
-                //Poofs.ReplaceRange(PoofsBackup);
                 Poofs.ReplaceRange(poofs);
+                
                 SortPoofs();
 
             }
@@ -179,9 +176,9 @@ namespace Poof.PageModels
                 LoadingMessage = "Deleting Poof...";
                 IsBusy = true;
                 await azureService.DeletePoof(poof);
-
-                //PoofsBackup.Remove(poof);
-                Poofs.Remove(poof);
+                var poofs = await azureService.GetPoofs();
+                
+                Poofs.ReplaceRange(poofs);
 
                 FilterPoofs();
                 SortPoofs();

@@ -15,7 +15,7 @@ namespace Poof.PageModels
 {
     public class PoofPageModel : BasePageModel
     {
-        private readonly IAzureService azureService;
+        private readonly AzureService azureService;
 
         #region Properties
 
@@ -25,9 +25,9 @@ namespace Poof.PageModels
 
         #endregion
 
-        public PoofPageModel(IAzureService azureService)
+        public PoofPageModel()
         {
-            this.azureService = azureService;
+            azureService = new AzureService();
         }
 
         #region Commands
@@ -46,7 +46,7 @@ namespace Poof.PageModels
 
                 await Task.Delay(4000);
 
-                var poof = await azureService.AddPoof(Justified, Comment, Settings.UserId);
+                var poof = await azureService.AddPoof(Justified, Comment, Settings.UserId, true);
 
                 Comment = null;
                 Justified = false;

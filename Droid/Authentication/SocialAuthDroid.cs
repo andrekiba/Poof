@@ -20,11 +20,11 @@ namespace Poof.Droid.Authentication
 {
     public class SocialAuthDroid : IAuthentication
     {
-        public Task<MobileServiceUser> LoginAsync(IMobileServiceClient client, MobileServiceAuthenticationProvider provider, IDictionary<string, string> parameters = null)
+        public async Task<MobileServiceUser> LoginAsync(IMobileServiceClient client, MobileServiceAuthenticationProvider provider, IDictionary<string, string> parameters = null)
         {
             try
             {
-                return client.LoginAsync(Forms.Context, provider, parameters);
+                return await client.LoginAsync(Forms.Context, provider, parameters);
             }
             catch
             {

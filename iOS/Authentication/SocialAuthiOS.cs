@@ -13,11 +13,11 @@ namespace Poof.iOS.Authentication
 {
     class SocialAuthiOS : IAuthentication
     {
-        public Task<MobileServiceUser> LoginAsync(IMobileServiceClient client, MobileServiceAuthenticationProvider provider, IDictionary<string, string> parameters = null)
+        public async Task<MobileServiceUser> LoginAsync(IMobileServiceClient client, MobileServiceAuthenticationProvider provider, IDictionary<string, string> parameters = null)
         {
             try
             {
-                return client.LoginAsync(GetController(), provider, parameters);
+                return await client.LoginAsync(GetController(), provider, parameters);
 
             }
             catch (Exception e)
