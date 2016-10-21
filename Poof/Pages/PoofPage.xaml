@@ -11,8 +11,8 @@
       <Grid.RowDefinitions>
         <RowDefinition Height="0.5*"/>
         <RowDefinition Height="1.5*"/>
-		<RowDefinition Height="2*"/>
-	    <RowDefinition Height="0.4*"/>
+		    <RowDefinition Height="2*"/>
+	      <RowDefinition Height="0.4*"/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
@@ -27,8 +27,8 @@
     
       <StackLayout Grid.Row="1" Grid.Column="1" Padding="20,20,20,0" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Label Text="Comment" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
-        <Frame Padding="2" HasShadow="False" BackgroundColor="{StaticResource BarTint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-          <Frame Padding="2" HasShadow="False" BackgroundColor="{StaticResource BarTint}">
+        <Frame Padding="2" HasShadow="False" BackgroundColor="{StaticResource Tint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+          <Frame Padding="2" HasShadow="False" BackgroundColor="{StaticResource Tint}">
             <Editor Text="{Binding Comment}" Style="{StaticResource EditorStyle}"/>
           </Frame>   
         </Frame>
@@ -41,7 +41,7 @@
 	  </Image>
 		
 	<StackLayout IsVisible="{Binding IsBusy}" Grid.Row="3" Grid.Column="1" Padding="20,0,20,20" Orientation="Horizontal" HorizontalOptions="Center" >
-		<ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource BarTint}" VerticalOptions="Center" HorizontalOptions="Center"/>
+		<ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Tint}" VerticalOptions="Center" HorizontalOptions="Center"/>
 		<Label Text="{Binding LoadingMessage}" HorizontalOptions="Center" VerticalOptions="Center" Style="{StaticResource LabelStyle}"/>
 	</StackLayout>
 

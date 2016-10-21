@@ -175,10 +175,8 @@ namespace Poof.PageModels
             {
                 LoadingMessage = "Deleting Poof...";
                 IsBusy = true;
+                Poofs.Remove(poof);
                 await azureService.DeletePoof(poof);
-                var poofs = await azureService.GetPoofs();
-                
-                Poofs.ReplaceRange(poofs);
 
                 FilterPoofs();
                 SortPoofs();

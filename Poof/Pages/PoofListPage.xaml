@@ -40,6 +40,7 @@
           ItemsSource="{Binding PoofsGrouped}"
           ItemTemplate="{StaticResource PoofTemplateSelector}"
           SeparatorVisibility="None"
+          SeparatorColor="{StaticResource Tint}"
 	  	    IsPullToRefreshEnabled="true"
           HasUnevenRows="True"
           IsRefreshing="{Binding IsBusy, Mode=OneWay}"
@@ -48,7 +49,7 @@
         <ListView.GroupHeaderTemplate>
           <DataTemplate>
             <ViewCell>
-              <StackLayout Orientation="Horizontal" Padding="10,5,10,5" BackgroundColor="{StaticResource Back}">
+              <StackLayout Orientation="Horizontal" Padding="10,0,0,0" BackgroundColor="{StaticResource TintTransparent}">
                 <Label Style="{StaticResource GroupLabelListStyle}" Text="{Binding Key}" />
               </StackLayout>
             </ViewCell>

@@ -7,25 +7,25 @@
     <!-- Application resource dictionary -->
     <ResourceDictionary>
 
-      <Color x:Key="Tint">#F1C40F</Color>
+      <!--<Color x:Key="Tint">#F1C40F</Color>
       <Color x:Key="BarTint">#E74C3C</Color>
       <Color x:Key="Back">#F3CE3A</Color>
       <Color x:Key="Accent">#3498DB</Color>
       <Color x:Key="Jet">#343330</Color>
       <Color x:Key="JetTransparent">#80343330</Color>
       <Color x:Key="Taupe">#908F8E</Color>
-      <Color x:Key="WhiteSmoke">#F7F7F7</Color>
+      <Color x:Key="WhiteSmoke">#F7F7F7</Color>-->
 
-      <!--<Color x:Key="Primary">#7A89C2</Color>
-      <Color x:Key="PrimaryDark">#5D2ABB</Color>
-      <Color x:Key="PrimaryDarkTranslucent">#9926213C</Color>
-      <Color x:Key="Accent">#753BE4</Color>
-      <Color x:Key="NavigationText">White</Color>
-      <Color x:Key="LabelSectionText">#6D6D72</Color>
-      <Color x:Key="DetailTextColor">#979797</Color>-->
+      <Color x:Key="Tint">#41bbc3</Color>
+      <Color x:Key="TintTransparent">#6041bbc3</Color>
+      <Color x:Key="BarTint">#e61873</Color>
+      <Color x:Key="Back">#ffffff</Color>
+      <Color x:Key="Accent">#127179</Color>
+      <Color x:Key="Jet">#6b6d76</Color> 
+      
 
       <Style TargetType="Label" x:Key="BaseLabelStyle" >
-        <Setter Property="FontFamily">
+        <!--<Setter Property="FontFamily">
           <Setter.Value>
             <OnPlatform x:TypeArguments="x:String">
               <OnPlatform.iOS>MarkerFelt-Thin</OnPlatform.iOS>
@@ -33,17 +33,11 @@
               <OnPlatform.WinPhone>Comic Sans MS</OnPlatform.WinPhone>
             </OnPlatform>
           </Setter.Value>
-        </Setter>
+        </Setter>-->
       </Style>
 
       <Style  TargetType="Label" x:Key="LabelStyle" BasedOn="{StaticResource BaseLabelStyle}">
-        <Setter Property="TextColor" Value="#E74C3C" />
-        <Setter Property="FontSize" Value="25" />
-        <Setter Property="FontAttributes" Value="Bold" />
-      </Style>
-
-      <Style TargetType="Label" x:Key="LabelStyle1" BasedOn="{StaticResource BaseLabelStyle}">
-        <Setter Property="TextColor" Value="#E74C3C" />
+        <Setter Property="TextColor" Value="{StaticResource Tint}" />
         <Setter Property="FontSize" Value="25" />
         <Setter Property="FontAttributes" Value="Bold" />
       </Style>
@@ -52,13 +46,13 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
         <Setter Property="LineBreakMode" Value="TailTruncation"/>
-        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="FontSize" Value="Small" />
         <Setter Property="FontAttributes" Value="None" />
       </Style>
 
       <Style TargetType="Label" x:Key="TimeLabelListStyle" BasedOn="{StaticResource BaseLabelStyle}">
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="FontSize" Value="Medium" />
         <Setter Property="FontAttributes" Value="None" />
       </Style>
 
@@ -67,14 +61,14 @@
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
         <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
         <Setter Property="FontSize" Value="Medium" />
-        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontAttributes" Value="Bold" />
       </Style>
 
       <Style TargetType="Editor" x:Key="EditorStyle">
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
         <Setter Property="BackgroundColor" Value="White" />
         <Setter Property="FontAttributes" Value="None" />
-        <Setter Property="FontFamily">
+        <!--<Setter Property="FontFamily">
           <Setter.Value>
             <OnPlatform x:TypeArguments="x:String">
               <OnPlatform.iOS>MarkerFelt-Thin</OnPlatform.iOS>
@@ -82,15 +76,15 @@
               <OnPlatform.WinPhone>Comic Sans MS</OnPlatform.WinPhone>
             </OnPlatform>
           </Setter.Value>
-        </Setter>
+        </Setter>-->
       </Style>
 
       <Style TargetType="SearchBar" x:Key="SearchBarStyle">
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
-        <Setter Property="BackgroundColor" Value="{StaticResource Taupe}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Tint}" />
         <Setter Property="CancelButtonColor" Value="White" />
         <Setter Property="FontAttributes" Value="None" />
-        <Setter Property="FontFamily">
+        <!--<Setter Property="FontFamily">
           <Setter.Value>
             <OnPlatform x:TypeArguments="x:String">
               <OnPlatform.iOS>MarkerFelt-Thin</OnPlatform.iOS>
@@ -98,14 +92,14 @@
               <OnPlatform.WinPhone>Comic Sans MS</OnPlatform.WinPhone>
             </OnPlatform>
           </Setter.Value>
-        </Setter>
+        </Setter>-->
       </Style>
 
       <Style TargetType="Entry" x:Key="SearchEntryStyle">
         <Setter Property="TextColor" Value="{StaticResource Jet}" />
         <Setter Property="BackgroundColor" Value="{StaticResource Back}" />
         <Setter Property="FontAttributes" Value="None" />
-        <Setter Property="FontFamily">
+        <!--<Setter Property="FontFamily">
           <Setter.Value>
             <OnPlatform x:TypeArguments="x:String">
               <OnPlatform.iOS>MarkerFelt-Thin</OnPlatform.iOS>
@@ -113,7 +107,7 @@
               <OnPlatform.WinPhone>Comic Sans MS</OnPlatform.WinPhone>
             </OnPlatform>
           </Setter.Value>
-        </Setter>
+        </Setter>-->
       </Style>
 
 

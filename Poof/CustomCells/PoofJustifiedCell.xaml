@@ -10,7 +10,7 @@
   <ViewCell.ContextActions>
     <MenuItem Command="{Binding Source={StaticResource PoofListPageModel}, Path=DeletePoofCommand}" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
   </ViewCell.ContextActions>
-  <Grid VerticalOptions="FillAndExpand" ColumnSpacing="2" Padding="5,5,10,5" BindingContext="{DynamicResource Poof}">
+  <Grid VerticalOptions="FillAndExpand" ColumnSpacing="0" Padding="5" BindingContext="{DynamicResource Poof}">
 
     <Grid.Resources>
       <ResourceDictionary>
@@ -21,11 +21,11 @@
 
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*"></ColumnDefinition>
-      <ColumnDefinition Width="5*"></ColumnDefinition>
+      <ColumnDefinition Width="4*"></ColumnDefinition>
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
-      <RowDefinition Height="3*"></RowDefinition>
       <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="2*"></RowDefinition>
     </Grid.RowDefinitions>
     <plugin:CircleImage
                       Grid.Row="0"
@@ -33,19 +33,24 @@
                       Grid.RowSpan="2"
                       HeightRequest="40"
                       WidthRequest="40"
-                      BorderThickness="2"
-                      BorderColor="{StaticResource Accent}"
+                      BorderThickness="0"
+                      BorderColor="{StaticResource Tint}"
                       Aspect="AspectFill"
                       HorizontalOptions="Center"
                       VerticalOptions="Center"
                       Source="poofBig.png" />
-    <Frame Grid.Row="0" Grid.Column="1" IsVisible="{Binding Comment, Converter={StaticResource StringToVisibilityConverter}}"  BackgroundColor="Transparent" HasShadow="False" Padding="2">
-      <Frame Padding="2" HasShadow="False" BackgroundColor="Transparent" >
-        <Label Text="{Binding Comment}" Style="{StaticResource CommentLabelListStyle}" />
-      </Frame>
-    </Frame>
-    <Label Grid.Row="1" Grid.Column="1" Text="{Binding TimeDisplay}" Style="{StaticResource TimeLabelListStyle}" TextColor="{StaticResource Accent}"/>
-    
+    <!--<Image
+          Grid.Row="0"
+          Grid.Column="0"
+          Grid.RowSpan="2"
+          HeightRequest="40"
+          WidthRequest="40"
+          Aspect="AspectFill"
+          HorizontalOptions="Center"
+          VerticalOptions="Center"
+          Source="poofBig.png"/>-->
+    <Label Grid.Row="0" Grid.Column="1" Text="{Binding TimeDisplay}" Style="{StaticResource TimeLabelListStyle}" TextColor="{StaticResource Tint}"/>
+    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Comment}" Style="{StaticResource CommentLabelListStyle}"/>
   </Grid>
 </ViewCell>
 

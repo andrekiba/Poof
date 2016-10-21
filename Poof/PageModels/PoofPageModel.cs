@@ -44,9 +44,7 @@ namespace Poof.PageModels
                 LoadingMessage = "Adding Poof...";
                 IsBusy = true;
 
-                await Task.Delay(4000);
-
-                var poof = await azureService.AddPoof(Justified, Comment, Settings.UserId, true);
+                var poof = await azureService.AddPoof(Justified, Comment, Settings.UserId);
 
                 Comment = null;
                 Justified = false;
