@@ -242,7 +242,6 @@
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
-    <BundleResource Include="Resources\Pacifico.ttf" />
     <BundleResource Include="Resources\tab_poof_w.png" />
     <BundleResource Include="Resources\tab_poof_w%402x.png" />
     <BundleResource Include="Resources\tab_poof_w%403x.png" />
