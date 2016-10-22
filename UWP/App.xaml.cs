@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using ImageCircle.Forms.Plugin.UWP;
 using Poof.UWP.Authentication;
+using Xamarin;
 
 namespace Poof.UWP
 {
@@ -48,6 +49,7 @@ namespace Poof.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+                Insights.Initialize("416420e0a779226dd8a0b72004d24af465e6a844");
                 Xamarin.Forms.Forms.Init(e);
 				ImageCircleRenderer.Init();
                 Xamarin.Forms.DependencyService.Register<SocialAuthUWP>();

@@ -12,6 +12,7 @@ using Poof.Extensions;
 using Poof.Helpers;
 using Poof.Services;
 using PropertyChanged;
+using Xamarin;
 using Xamarin.Forms;
 
 namespace Poof.PageModels
@@ -97,8 +98,7 @@ namespace Poof.PageModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("OH NO!" + ex);
-
+                Insights.Report(ex, Insights.Severity.Error);
                 await CoreMethods.DisplayAlert("Sync Error", "Unable to sync Poofs, you may be offline", "OK");
             }
             finally
@@ -126,7 +126,7 @@ namespace Poof.PageModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("OH NO!" + ex);
+                Insights.Report(ex, Insights.Severity.Error);
             }
             finally
             {
@@ -155,7 +155,7 @@ namespace Poof.PageModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("OH NO!" + ex);
+                Insights.Report(ex, Insights.Severity.Error);
             }
             finally
             {
@@ -184,8 +184,7 @@ namespace Poof.PageModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("OH NO!" + ex);
-
+                Insights.Report(ex, Insights.Severity.Error);
                 await CoreMethods.DisplayAlert("Sync Error", "Unable to sync Poofs, you may be offline", "OK");
             }
             finally

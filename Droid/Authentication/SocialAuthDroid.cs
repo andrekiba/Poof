@@ -1,19 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Microsoft.WindowsAzure.MobileServices;
 using Poof.Authentication;
 using Xamarin.Forms;
 using Poof.Droid.Authentication;
 using Poof.Helpers;
+using Xamarin;
 
 [assembly: Dependency(typeof(SocialAuthDroid))]
 namespace Poof.Droid.Authentication
@@ -26,9 +20,10 @@ namespace Poof.Droid.Authentication
             {
                 return await client.LoginAsync(Forms.Context, provider, parameters);
             }
-            catch
+            catch(Exception ex)
             {
                 // ignored
+                Insights.Report(ex, Insights.Severity.Error);
             }
 
             return null;
@@ -48,9 +43,9 @@ namespace Poof.Droid.Authentication
                     return true;
                 }
             }
-            catch (System.Exception e)
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Unable to refresh user: " + e);
+                Insights.Report(ex, Insights.Severity.Error);
             }
 
             return false;
@@ -60,11 +55,12 @@ namespace Poof.Droid.Authentication
         {
             try
             {
-                if ((int)global::Android.OS.Build.VERSION.SdkInt >= 21)
-                    global::Android.Webkit.CookieManager.Instance.RemoveAllCookies(null);
+                if ((int)Build.VERSION.SdkInt >= 21)
+                    Android.Webkit.CookieManager.Instance.RemoveAllCookies(null);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                // ignored
             }
         }
     }

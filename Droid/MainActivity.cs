@@ -1,15 +1,11 @@
 ﻿using System;
-
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using Poof.Services;
 using System.IO;
 using ImageCircle.Forms.Plugin.Droid;
+using Xamarin;
 
 namespace Poof.Droid
 {
@@ -22,6 +18,8 @@ namespace Poof.Droid
 			ToolbarResource = Resource.Layout.Toolbar;
 
 			base.OnCreate(bundle);
+
+            Insights.Initialize("416420e0a779226dd8a0b72004d24af465e6a844", this);
 
 			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 

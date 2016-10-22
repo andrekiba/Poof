@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
@@ -12,12 +11,13 @@ using Plugin.Connectivity;
 using Poof.Authentication;
 using Poof.Helpers;
 using Poof.Services;
+using Xamarin;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(AzureService))]
 namespace Poof.Services
 {
-    public class AzureService : IAzureService
+    public class AzureService //: IAzureService
     {
         private IMobileServiceSyncTable<Model.Poof> poofTable;
 
@@ -72,7 +72,7 @@ namespace Poof.Services
                 await SyncPoof();
 
             return await poofTable
-                        .Where(p => p.UserId == Settings.UserId && p.DateUtc >= DateTime.UtcNow.Date.AddDays(-7))
+                        //.Where(p => p.UserId == Settings.UserId && p.DateUtc >= DateTime.UtcNow.Date.AddDays(-7))
                         .OrderBy(c => c.DateUtc).ToEnumerableAsync();
         }
 
@@ -115,11 +115,13 @@ namespace Poof.Services
 
                 //pull down all latest changes and then push current poofs up
                 await Client.SyncContext.PushAsync();
-                await poofTable.PullAsync("allPoofs" + Settings.UserId, poofTable.CreateQuery());
+                //await poofTable.PullAsync("allPoofs" + Settings.UserId, poofTable.CreateQuery());
+                await poofTable.PullAsync("allPoofs" + Settings.UserId, poofTable.Where(p => p.UserId == Settings.UserId
+                                                                                             && p.DateUtc >= DateTime.UtcNow.Date.AddDays(-7)));
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Unable to sync poofs, that is alright as we have offline capabilities: " + ex);
+                Insights.Report(ex, Insights.Severity.Error);
             }
 
         }

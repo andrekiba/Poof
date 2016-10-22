@@ -11,7 +11,8 @@
     "Xam.Plugin.Connectivity": "2.2.12",
     "Xam.Plugins.Forms.ImageCircle": "1.8.0.5",
     "Xam.Plugins.Settings": "2.5.1",
-    "Xamarin.Forms": "2.3.2.127"
+    "Xamarin.Forms": "2.3.2.127",
+    "Xamarin.Insights": "1.12.3"
   },
   "frameworks": {
     "uap10.0": {}

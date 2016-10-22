@@ -11,8 +11,7 @@
       <Grid.RowDefinitions>
         <RowDefinition Height="0.5*"/>
         <RowDefinition Height="1.5*"/>
-		    <RowDefinition Height="2*"/>
-	      <RowDefinition Height="0.4*"/>
+        <RowDefinition Height="2*"/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
@@ -24,28 +23,36 @@
         <Label Text="Justified" Style="{StaticResource LabelStyle}" VerticalOptions="Center" HorizontalOptions="Start"/>
         <Switch IsToggled="{Binding Justified}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
       </StackLayout>
-    
+
       <StackLayout Grid.Row="1" Grid.Column="1" Padding="20,20,20,0" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Label Text="Comment" Style="{StaticResource LabelStyle}" HorizontalOptions="Start"/>
         <Frame Padding="2" HasShadow="False" BackgroundColor="{StaticResource Tint}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
           <Frame Padding="2" HasShadow="False" BackgroundColor="{StaticResource Tint}">
             <Editor Text="{Binding Comment}" Style="{StaticResource EditorStyle}"/>
-          </Frame>   
+          </Frame>
         </Frame>
       </StackLayout>
 
-	  <Image x:Name="PoofImage" Grid.Row="2" Grid.Column="1" Source="poofBig.png" IsEnabled="{Binding IsNotBusy}" VerticalOptions="Center" HorizontalOptions="Center">
-    	  <Image.GestureRecognizers>
-        	  <TapGestureRecognizer Command="{Binding PoofCommand}" Tapped="PoofTapped" NumberOfTapsRequired="1" />
-  		  </Image.GestureRecognizers>
-	  </Image>
-		
-	<StackLayout IsVisible="{Binding IsBusy}" Grid.Row="3" Grid.Column="1" Padding="20,0,20,20" Orientation="Horizontal" HorizontalOptions="Center" >
-		<ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Tint}" VerticalOptions="Center" HorizontalOptions="Center"/>
-		<Label Text="{Binding LoadingMessage}" HorizontalOptions="Center" VerticalOptions="Center" Style="{StaticResource LabelStyle}"/>
-	</StackLayout>
-
+      <Image x:Name="PoofImage" Grid.Row="2" Grid.Column="1" IsEnabled="{Binding IsNotBusy}" VerticalOptions="Center" HorizontalOptions="Center">
+        <Image.Source>
+          <OnPlatform x:TypeArguments="ImageSource"
+                    iOS="poofBig.png"
+                    Android="poofBig.png"
+                    WinPhone="Assets/poofBig.png"/>
+        </Image.Source>
+        <Image.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding PoofCommand}" Tapped="PoofTapped" NumberOfTapsRequired="1" />
+        </Image.GestureRecognizers>
+      </Image>
     </Grid>
-   
+    <StackLayout IsVisible="{Binding IsBusy}"
+                 Padding="30"
+                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                 AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                 BackgroundColor="{StaticResource TintTransparent}">
+      <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource Tint}"/>
+      <Label Text="{Binding LoadingMessage}" HorizontalOptions="Center" VerticalOptions="Center" Style="{StaticResource LabelStyle}"/>
+    </StackLayout>
+
   </AbsoluteLayout>
 </ContentPage>

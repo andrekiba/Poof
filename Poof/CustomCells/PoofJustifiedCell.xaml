@@ -37,8 +37,14 @@
                       BorderColor="{StaticResource Tint}"
                       Aspect="AspectFill"
                       HorizontalOptions="Center"
-                      VerticalOptions="Center"
-                      Source="poofBig.png" />
+                      VerticalOptions="Center">
+      <plugin:CircleImage.Source>
+        <OnPlatform x:TypeArguments="ImageSource"
+                    iOS="poofBig.png"
+                    Android="poofBig.png"
+                    WinPhone="Assets/poofBig.png"/>
+      </plugin:CircleImage.Source>
+    </plugin:CircleImage>
     <!--<Image
           Grid.Row="0"
           Grid.Column="0"
