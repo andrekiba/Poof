@@ -91,6 +91,26 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
+    <None Include="Assets\poofBigRosa.png" />
+    <None Include="Assets\poofBigVerde.png" />
+    <None Include="Assets\poofListRosa.png" />
+    <None Include="Assets\poofListRosa%402x.png" />
+    <None Include="Assets\poofListRosa%403x.png" />
+    <None Include="Assets\poofListTab.png" />
+    <None Include="Assets\poofListTab%402x.png" />
+    <None Include="Assets\poofListTab%403x.png" />
+    <None Include="Assets\poofListTabSel.png" />
+    <None Include="Assets\poofListTabSel%402x.png" />
+    <None Include="Assets\poofListTabSel%403x.png" />
+    <None Include="Assets\poofListVerde.png" />
+    <None Include="Assets\poofListVerde%402x.png" />
+    <None Include="Assets\poofListVerde%403x.png" />
+    <None Include="Assets\poofTab.png" />
+    <None Include="Assets\poofTab%402x.png" />
+    <None Include="Assets\poofTab%403x.png" />
+    <None Include="Assets\poofTabSel.png" />
+    <None Include="Assets\poofTabSel%402x.png" />
+    <None Include="Assets\poofTabSel%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

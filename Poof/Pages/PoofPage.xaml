@@ -33,17 +33,20 @@
         </Frame>
       </StackLayout>
 
-      <Image x:Name="PoofImage" Grid.Row="2" Grid.Column="1" IsEnabled="{Binding IsNotBusy}" VerticalOptions="Center" HorizontalOptions="Center">
+      <Frame Grid.Row="2" Grid.Column="1" Padding="25" HasShadow="false" BackgroundColor="Transparent">
+      <Image x:Name="PoofImage" IsEnabled="{Binding IsNotBusy}" VerticalOptions="Center" HorizontalOptions="Center">
         <Image.Source>
           <OnPlatform x:TypeArguments="ImageSource"
-                    iOS="poofBig.png"
-                    Android="poofBig.png"
-                    WinPhone="Assets/poofBig.png"/>
+                    iOS="poofBigRosa.png"
+                    Android="poofBigRosa.png"
+                    WinPhone="Assets/poofBigRosa.png"/>
         </Image.Source>
         <Image.GestureRecognizers>
           <TapGestureRecognizer Command="{Binding PoofCommand}" Tapped="PoofTapped" NumberOfTapsRequired="1" />
         </Image.GestureRecognizers>
       </Image>
+	</Frame>
+
     </Grid>
     <StackLayout IsVisible="{Binding IsBusy}"
                  Padding="30"

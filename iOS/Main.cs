@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using UIKit;
+﻿using UIKit;
 using Xamarin;
 
 namespace Poof.iOS
@@ -16,6 +11,7 @@ namespace Poof.iOS
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.
 		    Insights.Initialize("416420e0a779226dd8a0b72004d24af465e6a844");
+			Insights.ForceDataTransmission = true;
 
             UIApplication.Main(args, null, "AppDelegate");
 		}

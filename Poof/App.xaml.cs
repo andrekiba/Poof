@@ -11,11 +11,11 @@ namespace Poof
 		{
 			InitializeComponent();
 
-            //FreshIOC.Container.Register<IAzureService, AzureService>();
+            FreshIOC.Container.Register<IAzureService, AzureService>();
 
             var tabbedNavigation = new FreshTabbedNavigationContainer();
-			tabbedNavigation.AddTab<PoofPageModel>("Poof", Device.OnPlatform("tab_poof_w.png", "tab_poof_w.png", "Assets/tab_poof_w.png") );
-			tabbedNavigation.AddTab<PoofListPageModel>("Poofs", Device.OnPlatform("tab_poofList_w.png", "tab_poofList_w.png", "Assets/tab_poofList_w.png"));
+			tabbedNavigation.AddTab<PoofPageModel>("Poof", Device.OnPlatform("poofTab.png", "poofTab.png", "Assets/poofTab.png") );
+			tabbedNavigation.AddTab<PoofListPageModel>("Poofs", Device.OnPlatform("poofListTab.png", "poofListTab.png", "Assets/poofListTab.png"));
 
             //tabbedNavigation.BarBackgroundColor = (Color)Resources[@"BarTint"];
             //tabbedNavigation.BarTextColor = (Color)Resources[@"Tint"];

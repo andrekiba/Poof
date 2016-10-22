@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -73,7 +73,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -91,6 +91,21 @@
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <PlatformTarget>x86</PlatformTarget>
     <MtouchSdkVersion>10.0</MtouchSdkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UITest|iPhone' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\UITest</OutputPath>
+    <DefineConstants>ENABLE_TEST_CLOUD</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchUseSGen>true</MtouchUseSGen>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FreshIOC, Version=1.0.6071.17008, Culture=neutral, processorArchitecture=MSIL">
@@ -221,13 +236,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <InProject>false</InProject>
-    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json">
+    <ImageAsset Include="Assets.xcassets\AppIconRosa.appiconset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIconVerde.appiconset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\LaunchRosaVerde.launchimage\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\LaunchVerdeRosa.launchimage\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>
@@ -242,12 +263,6 @@
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
-    <BundleResource Include="Resources\tab_poof_w.png" />
-    <BundleResource Include="Resources\tab_poof_w%402x.png" />
-    <BundleResource Include="Resources\tab_poof_w%403x.png" />
-    <BundleResource Include="Resources\tab_poofList_w.png" />
-    <BundleResource Include="Resources\tab_poofList_w%402x.png" />
-    <BundleResource Include="Resources\tab_poofList_w%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\SocialAuthiOS.cs" />
@@ -256,20 +271,37 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\CustomTabbedRenderer.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\tab_poof.png" />
-    <BundleResource Include="Resources\tab_poof%402x.png" />
-    <BundleResource Include="Resources\tab_poof%403x.png" />
-    <BundleResource Include="Resources\tab_poofList.png" />
-    <BundleResource Include="Resources\tab_poofList%402x.png" />
-    <BundleResource Include="Resources\tab_poofList%403x.png" />
-    <BundleResource Include="Resources\poofBig.png" />
-    <BundleResource Include="Resources\poofBig%402x.png" />
-    <BundleResource Include="Resources\poofIcon.png" />
-    <BundleResource Include="Resources\poofIcon%402x.png" />
-    <BundleResource Include="Resources\poofIcon%403x.png" />
-  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="Assets.xcassets\AppIconRosa.imageset\" />
+    <Folder Include="Assets.xcassets\AppIconRosa.appiconset\" />
+    <Folder Include="Assets.xcassets\AppIconVerde.appiconset\" />
+    <Folder Include="Assets.xcassets\LaunchRosaVerde.launchimage\" />
+    <Folder Include="Assets.xcassets\LaunchVerdeRosa.launchimage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\poofBigRosa.png" />
+    <BundleResource Include="Resources\poofBigVerde.png" />
+    <BundleResource Include="Resources\poofListRosa.png" />
+    <BundleResource Include="Resources\poofListRosa%402x.png" />
+    <BundleResource Include="Resources\poofListRosa%403x.png" />
+    <BundleResource Include="Resources\poofListTab.png" />
+    <BundleResource Include="Resources\poofListTab%402x.png" />
+    <BundleResource Include="Resources\poofListTab%403x.png" />
+    <BundleResource Include="Resources\poofListTabSel.png" />
+    <BundleResource Include="Resources\poofListTabSel%402x.png" />
+    <BundleResource Include="Resources\poofListTabSel%403x.png" />
+    <BundleResource Include="Resources\poofListVerde.png" />
+    <BundleResource Include="Resources\poofListVerde%402x.png" />
+    <BundleResource Include="Resources\poofListVerde%403x.png" />
+    <BundleResource Include="Resources\poofTab.png" />
+    <BundleResource Include="Resources\poofTab%402x.png" />
+    <BundleResource Include="Resources\poofTab%403x.png" />
+    <BundleResource Include="Resources\poofTabSel.png" />
+    <BundleResource Include="Resources\poofTabSel%402x.png" />
+    <BundleResource Include="Resources\poofTabSel%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

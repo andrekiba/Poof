@@ -19,7 +19,7 @@ namespace Poof.PageModels
 {
     public class PoofListPageModel : BasePageModel
     {
-        private readonly AzureService azureService;
+        private readonly IAzureService azureService;
 
         #region Properties
 
@@ -36,9 +36,9 @@ namespace Poof.PageModels
 
         #region Constructor
 
-        public PoofListPageModel()
+        public PoofListPageModel(IAzureService azureService)
         {
-            this.azureService = new AzureService();
+            this.azureService = azureService;
 
             var search = this
                 .ToObservable(() => SearchText)
@@ -176,10 +176,10 @@ namespace Poof.PageModels
                 LoadingMessage = "Deleting Poof...";
                 IsBusy = true;
                 Poofs.Remove(poof);
-                await azureService.DeletePoof(poof);
-
                 FilterPoofs();
                 SortPoofs();
+
+                await azureService.DeletePoof(poof);
 
             }
             catch (Exception ex)
@@ -236,7 +236,7 @@ namespace Poof.PageModels
                 });
             }
 
-            CrossConnectivity.Current.ConnectivityChanged += ConnecitvityChanged;
+           CrossConnectivity.Current.ConnectivityChanged += ConnecitvityChanged;
            IsOfflineStackVisible = !CrossConnectivity.Current.IsConnected;
 
             if (Poofs.Count == 0 && Settings.IsLoggedIn)

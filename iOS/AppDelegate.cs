@@ -42,7 +42,7 @@ namespace Poof.iOS
 
 			UITabBar.Appearance.TintColor = back;
 			UITabBar.Appearance.BarTintColor = barTint;
-			UITabBar.Appearance.SelectedImageTintColor = tint;
+			//UITabBar.Appearance.SelectedImageTintColor = tint;
 			UITabBar.Appearance.BackgroundColor = barTint;
 
 			UITabBarItem.Appearance.SetTitleTextAttributes(new UITextAttributes
@@ -63,7 +63,7 @@ namespace Poof.iOS
 		    UIBarButtonItem.Appearance.SetTitleTextAttributes(new UITextAttributes
 		    {
 		     	//Font = UIFont.FromName("MarkerFelt-Thin", 18f),
-		     	TextColor = back
+		     	TextColor = barTint
 		    }, UIControlState.Normal);
 
 			//switch
@@ -78,10 +78,8 @@ namespace Poof.iOS
 			Forms.Init();
 			ImageCircleRenderer.Init();
 
-			// Code for starting up the Xamarin Test Cloud Agent
-#if ENABLE_TEST_CLOUD
+			#if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start();
-			//Mapping StyleId to iOS Labels
 			Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) =>
 			{
 				if (null != e.View.StyleId)
@@ -89,7 +87,7 @@ namespace Poof.iOS
 					e.NativeView.AccessibilityIdentifier = e.View.StyleId;
 				}
 			};
-#endif
+			#endif
 
 			LoadApplication(new App());
 

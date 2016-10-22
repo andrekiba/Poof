@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             xmlns:vm="clr-namespace:Poof.PageModels;assembly=Poof"
              x:Class="Poof.App">
   <Application.Resources>
     <!-- Application resource dictionary -->
@@ -109,9 +108,6 @@
           </Setter.Value>
         </Setter>-->
       </Style>
-
-
-      <vm:PoofListPageModel x:Key="PoofListPageModel" />
 
     </ResourceDictionary>
   </Application.Resources>

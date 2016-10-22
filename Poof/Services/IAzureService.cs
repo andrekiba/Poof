@@ -5,11 +5,11 @@ namespace Poof.Services
 {
     public interface IAzureService
     {
-        Task<IEnumerable<Model.Poof>> GetPoofs(bool sync);
+        Task<IEnumerable<Model.Poof>> GetPoofs(bool sync = false);
 
-        Task<Model.Poof> AddPoof(bool justified, string comment, string userId, bool sync);
+        Task<Model.Poof> AddPoof(bool justified, string comment, string userId, bool sync = false);
 
-        Task DeletePoof(Model.Poof poof, bool sync);
+        Task DeletePoof(Model.Poof poof, bool sync = false);
 
         Task<bool> LoginAsync();
     }

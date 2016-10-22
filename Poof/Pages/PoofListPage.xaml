@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Poof.Pages.PoofListPage"
-             xmlns:vm="clr-namespace:Poof.PageModels;assembly=Poof"
              xmlns:sel="clr-namespace:Poof.Selectors;assembly=Poof"
              BackgroundColor="{StaticResource Back}"
              Title="Poofs">
@@ -10,7 +9,6 @@
   <ContentPage.Resources>
     <ResourceDictionary>
       <sel:PoofTemplateSelector x:Key="PoofTemplateSelector"/>
-      <vm:PoofListPageModel x:Key="PoofListPageModel"/>
     </ResourceDictionary>
   </ContentPage.Resources>
 
@@ -34,7 +32,6 @@
       </StackLayout>
 
       <ListView Grid.Row="1" x:Name="PoofsView"
-          CachingStrategy="RecycleElement"
           GroupDisplayBinding="{Binding Key}"
           IsGroupingEnabled="true"
           ItemsSource="{Binding PoofsGrouped}"

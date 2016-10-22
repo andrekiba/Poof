@@ -17,7 +17,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(AzureService))]
 namespace Poof.Services
 {
-    public class AzureService //: IAzureService
+    public class AzureService : IAzureService
     {
         private IMobileServiceSyncTable<Model.Poof> poofTable;
 

@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Poof.CustomCells
 {
-    public partial class PoofNotJustifiedCell : ViewCell
+    public partial class PoofNotJustifiedCell : BaseCell
     {
         public PoofNotJustifiedCell()
         {

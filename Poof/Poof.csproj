@@ -29,6 +29,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UITest|iPhone' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\UITest</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
   </ItemGroup>
@@ -38,6 +43,7 @@
     </Compile>
     <Compile Include="Authentication\AuthHandler.cs" />
     <Compile Include="Authentication\IAuthentication.cs" />
+    <Compile Include="CustomCells\BaseCell.cs" />
     <Compile Include="CustomCells\PoofJustifiedCell.xaml.cs">
       <DependentUpon>PoofJustifiedCell.xaml</DependentUpon>
     </Compile>

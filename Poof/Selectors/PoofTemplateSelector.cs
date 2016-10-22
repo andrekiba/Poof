@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Poof.CustomCells;
+using Poof.PageModels;
 using Xamarin.Forms;
 
 namespace Poof.Selectors
 {
     internal class PoofTemplateSelector : DataTemplateSelector
     {
-        public PoofTemplateSelector()
+        private readonly DataTemplate justifiedDataTemplate;
+		private readonly DataTemplate notJustifiedDataTemplate;
+
+		public PoofTemplateSelector()
         {
             // Retain instances!
             justifiedDataTemplate = new DataTemplate(typeof(PoofJustifiedCell));
@@ -22,10 +26,9 @@ namespace Poof.Selectors
             var poof = item as Model.Poof;
             if (poof == null)
                 return null;
-            return poof.Justified ? justifiedDataTemplate : notJustifiedDataTemplate;
+            var template = poof.Justified ? justifiedDataTemplate : notJustifiedDataTemplate;
+			template.SetValue(BaseCell.ParentBindingContextProperty, (PoofListPageModel)container.BindingContext);
+            return template;
         }
-
-        private readonly DataTemplate justifiedDataTemplate;
-        private readonly DataTemplate notJustifiedDataTemplate;
     }
 }
