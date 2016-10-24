@@ -48,7 +48,7 @@
         <Setter Property="FontAttributes" Value="None" />
 		<Setter Property="TextColor">
           <Setter.Value>
-            <OnPlatform x:TypeArguments="x:Color">
+            <OnPlatform x:TypeArguments="Color">
               <OnPlatform.iOS>#6b6d76</OnPlatform.iOS>
               <OnPlatform.Android>#ffffff</OnPlatform.Android>
               <OnPlatform.WinPhone>#ffffff</OnPlatform.WinPhone>
@@ -70,7 +70,7 @@
         <Setter Property="FontAttributes" Value="Bold" />
 		<Setter Property="TextColor">
           <Setter.Value>
-            <OnPlatform x:TypeArguments="x:Color">
+            <OnPlatform x:TypeArguments="Color">
               <OnPlatform.iOS>#6b6d76</OnPlatform.iOS>
               <OnPlatform.Android>#ffffff</OnPlatform.Android>
               <OnPlatform.WinPhone>#ffffff</OnPlatform.WinPhone>

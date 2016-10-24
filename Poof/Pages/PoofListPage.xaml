@@ -37,8 +37,8 @@
           ItemTemplate="{StaticResource PoofTemplateSelector}"
           SeparatorVisibility="None"
           SeparatorColor="{StaticResource Tint}"
-	  	  IsPullToRefreshEnabled="true"
-          HasUnevenRows="False"
+	  	    IsPullToRefreshEnabled="True"
+          HasUnevenRows="True"
           IsRefreshing="{Binding IsBusy, Mode=OneWay}"
           RefreshCommand="{Binding LoadPoofsCommand}">
         <ListView.GroupHeaderTemplate>
