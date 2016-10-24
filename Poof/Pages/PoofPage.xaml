@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Poof.Pages.PoofPage"
-             BackgroundColor="{StaticResource Back}"
              Title="Poof"
              BindingContext="Poof.PageModels.PoofPageModel">
   <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -33,7 +32,7 @@
         </Frame>
       </StackLayout>
 
-      <Frame Grid.Row="2" Grid.Column="1" Padding="25" HasShadow="false" BackgroundColor="Transparent">
+      <!--<Frame Grid.Row="2" Grid.Column="1" Padding="25" HasShadow="false" BackgroundColor="Transparent">
       <Image x:Name="PoofImage" IsEnabled="{Binding IsNotBusy}" VerticalOptions="Center" HorizontalOptions="Center">
         <Image.Source>
           <OnPlatform x:TypeArguments="ImageSource"
@@ -45,7 +44,19 @@
           <TapGestureRecognizer Command="{Binding PoofCommand}" Tapped="PoofTapped" NumberOfTapsRequired="1" />
         </Image.GestureRecognizers>
       </Image>
-	</Frame>
+	</Frame>-->
+
+     <Image Grid.Row="2" Grid.Column="1" x:Name="PoofImage" IsEnabled="{Binding IsNotBusy}" VerticalOptions="Center" HorizontalOptions="Center">
+        <Image.Source>
+          <OnPlatform x:TypeArguments="ImageSource"
+                    iOS="poofBigRosa.png"
+                    Android="poofBigRosa.png"
+                    WinPhone="Assets/poofBigRosa.png"/>
+        </Image.Source>
+        <Image.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding PoofCommand}" Tapped="PoofTapped" NumberOfTapsRequired="1" />
+        </Image.GestureRecognizers>
+      </Image>
 
     </Grid>
     <StackLayout IsVisible="{Binding IsBusy}"

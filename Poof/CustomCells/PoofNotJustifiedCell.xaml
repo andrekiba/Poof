@@ -6,8 +6,7 @@
              xmlns:model="clr-namespace:Poof.Model;assembly=Poof"
              xmlns:conv="clr-namespace:Poof.Converters;assembly=Poof"
              xmlns:customCells="clr-namespace:Poof.CustomCells;assembly=Poof"
-		     x:Name="PoofNotJustifiedCell"
-             Height="60">
+		     x:Name="PoofNotJustifiedCell">
 
   <ViewCell.ContextActions>
     <MenuItem Command="{Binding Path=ParentBindingContext.DeletePoofCommand, Source={x:Reference PoofNotJustifiedCell}}" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />

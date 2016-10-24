@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Poof.Pages.PoofListPage"
              xmlns:sel="clr-namespace:Poof.Selectors;assembly=Poof"
-             BackgroundColor="{StaticResource Back}"
              Title="Poofs">
 
   <ContentPage.Resources>
@@ -38,11 +37,10 @@
           ItemTemplate="{StaticResource PoofTemplateSelector}"
           SeparatorVisibility="None"
           SeparatorColor="{StaticResource Tint}"
-	  	    IsPullToRefreshEnabled="true"
-          HasUnevenRows="True"
+	  	  IsPullToRefreshEnabled="true"
+          HasUnevenRows="False"
           IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-          RefreshCommand="{Binding LoadPoofsCommand}"
-          BackgroundColor="{StaticResource Back}">
+          RefreshCommand="{Binding LoadPoofsCommand}">
         <ListView.GroupHeaderTemplate>
           <DataTemplate>
             <ViewCell>

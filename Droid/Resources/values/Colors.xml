@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+  <color name="primary">#e61873</color> <!--BarTint-->
+  <color name="primaryDark">#93104A</color> <!--BarTint Dark-->
+  <color name="accent">#41bbc3</color> <!--Tint-->
+  <color name="window_background">#6b6d76</color> <!--Jet-->
+</resources>
