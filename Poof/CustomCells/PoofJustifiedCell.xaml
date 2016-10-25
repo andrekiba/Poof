@@ -43,7 +43,7 @@
         <OnPlatform x:TypeArguments="ImageSource"
                     iOS="poofListVerde.png"
                     Android="poofListVerde.png"
-                    WinPhone="Assets/poofListVerde.png"/>
+                    WinPhone="poofListVerde.png"/>
       </plugin:CircleImage.Source>
     </plugin:CircleImage>
     <!--<Image

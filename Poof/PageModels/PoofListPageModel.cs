@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
@@ -62,6 +63,17 @@ namespace Poof.PageModels
 
             search.Connect();
             empty.Connect();
+
+            if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
+                return;
+
+            if (ToolbarItems == null)
+                ToolbarItems = new ObservableCollection<ToolbarItem>();
+            ToolbarItems.Add(new ToolbarItem
+            {
+                Text = "Refresh",
+                Command = LoadPoofsCommand
+            });
         }
 
         #endregion
@@ -226,15 +238,6 @@ namespace Poof.PageModels
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-
-            if (Device.OS != TargetPlatform.iOS && Device.OS != TargetPlatform.Android)
-            {
-                ToolbarItems.Add(new ToolbarItem
-                {
-                    Text = "Refresh",
-                    Command = LoadPoofsCommand
-                });
-            }
 
            CrossConnectivity.Current.ConnectivityChanged += ConnecitvityChanged;
            IsOfflineStackVisible = !CrossConnectivity.Current.IsConnected;

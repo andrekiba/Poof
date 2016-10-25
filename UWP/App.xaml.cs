@@ -1,12 +1,16 @@
 ﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation.Metadata;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using ImageCircle.Forms.Plugin.UWP;
 using Poof.UWP.Authentication;
 using Xamarin;
+using Application = Windows.UI.Xaml.Application;
 
 namespace Poof.UWP
 {
@@ -38,7 +42,34 @@ namespace Poof.UWP
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-            Frame rootFrame = Window.Current.Content as Frame;
+            //Desktop
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+            {
+                var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+
+                if (titleBar != null)
+                {
+                    titleBar.BackgroundColor = Color.FromArgb(255, 230, 24, 115);
+                    titleBar.ForegroundColor = Colors.White;
+                    titleBar.ButtonBackgroundColor = Color.FromArgb(255, 230, 24, 115);
+                    titleBar.ButtonForegroundColor = Colors.White;
+                }               
+            }
+
+            //Mobile
+            //if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            //{
+            //    var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+
+            //    if (statusBar != null)
+            //    {
+            //        statusBar.BackgroundColor = Color.FromArgb(255, 230, 24, 115);
+            //        statusBar.ForegroundColor = Colors.White;
+            //        statusBar.BackgroundOpacity = 1;
+            //    }                
+            //}
+
+            var rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
