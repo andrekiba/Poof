@@ -57,17 +57,17 @@ namespace Poof.UWP
             }
 
             //Mobile
-            //if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            //{
-            //    var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
 
-            //    if (statusBar != null)
-            //    {
-            //        statusBar.BackgroundColor = Color.FromArgb(255, 230, 24, 115);
-            //        statusBar.ForegroundColor = Colors.White;
-            //        statusBar.BackgroundOpacity = 1;
-            //    }                
-            //}
+                if (statusBar != null)
+                {
+                    statusBar.BackgroundColor = Color.FromArgb(255, 230, 24, 115);
+                    statusBar.ForegroundColor = Colors.White;
+                    statusBar.BackgroundOpacity = 1;
+                }
+            }
 
             var rootFrame = Window.Current.Content as Frame;
 
