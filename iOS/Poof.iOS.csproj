@@ -116,6 +116,14 @@
       <HintPath>..\packages\FreshMvvm.2.2.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FreshMvvm.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="HockeySDK, Version=1.0.6103.22142, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HockeySDK.Xamarin.4.1.0\lib\Xamarin.iOS10\HockeySDK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HockeySDK.iOSBindings, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HockeySDK.Xamarin.4.1.0\lib\Xamarin.iOS10\HockeySDK.iOSBindings.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.8.0.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.8.0.5\lib\Xamarin.iOS10\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
       <Private>True</Private>
@@ -271,15 +279,14 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\CustomTabbedRenderer.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
-    <Folder Include="Assets.xcassets\AppIconRosa.imageset\" />
     <Folder Include="Assets.xcassets\AppIconRosa.appiconset\" />
+    <Folder Include="Assets.xcassets\AppIconRosa.imageset\" />
     <Folder Include="Assets.xcassets\AppIconVerde.appiconset\" />
     <Folder Include="Assets.xcassets\LaunchRosaVerde.launchimage\" />
     <Folder Include="Assets.xcassets\LaunchVerdeRosa.launchimage\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BundleResource Include="Resources\poofBigRosa.png" />
     <BundleResource Include="Resources\poofBigVerde.png" />

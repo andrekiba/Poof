@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using HockeyApp.iOS;
 using ImageCircle.Forms.Plugin.iOS;
 using Social;
 using UIKit;
@@ -13,7 +14,9 @@ namespace Poof.iOS
 	[Register("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
-		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        private readonly string HockeyAppId = "fa39ad79a3cb4136b676798e74560872 ";
+
+        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			#region Colors
 
@@ -74,11 +77,22 @@ namespace Poof.iOS
 
             #endregion
 
-            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
-			Forms.Init();
-			ImageCircleRenderer.Init();
+            #region HockeyApp
 
-			#if ENABLE_TEST_CLOUD
+            var hockeyManager = BITHockeyManager.SharedHockeyManager;
+            hockeyManager.Configure(HockeyAppId);
+            hockeyManager.StartManager();
+            hockeyManager.Authenticator.AuthenticateInstallation();
+
+            #endregion
+
+            #region Azure
+
+            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+
+            #endregion
+
+#if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start();
 			Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) =>
 			{
@@ -87,9 +101,11 @@ namespace Poof.iOS
 					e.NativeView.AccessibilityIdentifier = e.View.StyleId;
 				}
 			};
-			#endif
+#endif
+            Forms.Init();
+            ImageCircleRenderer.Init();
 
-			LoadApplication(new App());
+            LoadApplication(new App());
 
 			return base.FinishedLaunching(app, options);
 		}

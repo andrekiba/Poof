@@ -51,6 +51,9 @@ namespace Poof.PageModels
                 Comment = null;
                 Justified = false;
 
+                //esiste overload per proprietà e metriche
+                HockeyApp.MetricsManager.TrackEvent("Add Poof");
+
             }
             catch (Exception ex)
             {
