@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using ImageCircle.Forms.Plugin.UWP;
+using Microsoft.HockeyApp;
 using Poof.UWP.Authentication;
 using Xamarin;
 using Application = Windows.UI.Xaml.Application;
@@ -25,8 +26,8 @@ namespace Poof.UWP
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace Poof.UWP
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
             //Desktop
@@ -59,7 +60,7 @@ namespace Poof.UWP
             //Mobile
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
-                var statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+                var statusBar = StatusBar.GetForCurrentView();
 
                 if (statusBar != null)
                 {
@@ -79,6 +80,8 @@ namespace Poof.UWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
+
+                HockeyClient.Current.Configure("2c53364256a4443da145fda334b9c3d8");
 
                 Insights.Initialize("416420e0a779226dd8a0b72004d24af465e6a844");
                 Xamarin.Forms.Forms.Init(e);

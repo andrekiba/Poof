@@ -22,7 +22,7 @@ namespace Poof
 
             //tabbedNavigation.BarBackgroundColor = (Color)Resources[@"BarTint"];
             //tabbedNavigation.BarTextColor = (Color)Resources[@"Tint"];
-
+		    //tabbedNavigation.Title = "POOF";
             MainPage = tabbedNavigation;
 		}
 

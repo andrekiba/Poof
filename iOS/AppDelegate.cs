@@ -82,7 +82,7 @@ namespace Poof.iOS
             var hockeyManager = BITHockeyManager.SharedHockeyManager;
             hockeyManager.Configure(HockeyAppId);
             hockeyManager.StartManager();
-            hockeyManager.Authenticator.AuthenticateInstallation();
+            
 
             #endregion
 

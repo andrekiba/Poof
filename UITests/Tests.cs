@@ -12,7 +12,7 @@ namespace Poof.UITests
 	public class Tests
 	{
 		IApp app;
-		Platform platform;
+	    readonly Platform platform;
 
 		public Tests(Platform platform)
 		{
@@ -25,13 +25,10 @@ namespace Poof.UITests
 			app = AppInitializer.StartApp(platform);
 		}
 
-		[Test]
-		public void WelcomeTextIsDisplayed()
-		{
-			AppResult[] results = app.WaitForElement(c => c.Marked("Welcome to Xamarin Forms!"));
-			app.Screenshot("Welcome screen.");
-
-			Assert.IsTrue(results.Any());
-		}
-	}
+        [Test]
+        public void AppLaunches()
+        {
+            app.Screenshot("First screen.");
+        }
+    }
 }

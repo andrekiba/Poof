@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using FreshMvvm;
-using MvvmHelpers;
 using Poof.Helpers;
 using Poof.Services;
 using Xamarin;
@@ -52,7 +46,7 @@ namespace Poof.PageModels
                 Justified = false;
 
                 //esiste overload per proprietà e metriche
-                HockeyApp.MetricsManager.TrackEvent("Add Poof");
+                //HockeyApp.MetricsManager.TrackEvent("Add Poof");
 
             }
             catch (Exception ex)

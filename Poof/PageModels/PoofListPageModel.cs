@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
@@ -12,7 +10,6 @@ using Plugin.Connectivity;
 using Poof.Extensions;
 using Poof.Helpers;
 using Poof.Services;
-using PropertyChanged;
 using Xamarin;
 using Xamarin.Forms;
 
@@ -67,13 +64,14 @@ namespace Poof.PageModels
             if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
                 return;
 
-            if (ToolbarItems == null)
-                ToolbarItems = new ObservableCollection<ToolbarItem>();
-            ToolbarItems.Add(new ToolbarItem
-            {
-                Text = "Refresh",
-                Command = LoadPoofsCommand
-            });
+            //if (ToolbarItems == null)
+            //    ToolbarItems = new ObservableCollection<ToolbarItem>();
+            //ToolbarItems.Add(new ToolbarItem
+            //{
+            //    Text = "Refresh",
+            //    Icon = "poofTabSel.png",
+            //    Command = LoadPoofsCommand
+            //});
         }
 
         #endregion
@@ -84,7 +82,7 @@ namespace Poof.PageModels
         public ICommand LoadPoofsCommand => loadPoofsCommand ?? (loadPoofsCommand = new Command(async () => await ExecuteLoadPoofsCommand()));
         private async Task ExecuteLoadPoofsCommand()
         {
-            HockeyApp.MetricsManager.TrackEvent("Laod Poofs");
+            //HockeyApp.MetricsManager.TrackEvent("Laod Poofs");
 
             if (IsBusy || !(await LoginAsync()))
                 return;
@@ -126,7 +124,7 @@ namespace Poof.PageModels
         public ICommand SearchPoofsCommand => searchPoofsCommand ?? (searchPoofsCommand = new Command(ExecuteSearchPoofsCommand));
         private void ExecuteSearchPoofsCommand()
         {
-            HockeyApp.MetricsManager.TrackEvent("Search Poofs");
+            //HockeyApp.MetricsManager.TrackEvent("Search Poofs");
 
             if (IsBusy || !Poofs.Any())
                 return;
@@ -184,7 +182,7 @@ namespace Poof.PageModels
         public ICommand DeletePoofCommand => deletePoofCommand ?? (deletePoofCommand = new Command<Model.Poof>(async poof => await ExecuteDeletePoofCommand(poof)));
         private async Task ExecuteDeletePoofCommand(Model.Poof poof)
         {
-            HockeyApp.MetricsManager.TrackEvent("Delete Poof");
+            //HockeyApp.MetricsManager.TrackEvent("Delete Poof");
 
             if (IsBusy)
                 return;

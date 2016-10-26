@@ -10,7 +10,11 @@
       <sel:PoofTemplateSelector x:Key="PoofTemplateSelector"/>
     </ResourceDictionary>
   </ContentPage.Resources>
-
+  
+  <!--<ContentPage.ToolbarItems>
+    <ToolbarItem Text="Refresh" Command="LoadPoofsCommand"></ToolbarItem>
+  </ContentPage.ToolbarItems>-->
+  
   <!--<AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">-->
     <!--<Grid AbsoluteLayout.LayoutFlags="All"
           AbsoluteLayout.LayoutBounds="0,0,1,1">-->
