@@ -39,14 +39,14 @@ namespace Poof.PageModels
                 LoadingMessage = "Adding Poof...";
                 IsBusy = true;
 
+				//esiste overload per proprietà e metriche
+                HockeyApp.MetricsManager.TrackEvent("Add Poof");
+
 				//await Task.Delay(4000);
 				await azureService.AddPoof(Justified, Comment, Settings.UserId);
 
                 Comment = null;
-                Justified = false;
-
-                //esiste overload per proprietà e metriche
-                //HockeyApp.MetricsManager.TrackEvent("Add Poof");
+                Justified = false;             
 
             }
             catch (Exception ex)
