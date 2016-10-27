@@ -10,7 +10,7 @@ namespace Poof.iOS
 	[Register("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
-        private readonly string HockeyAppId = "fa39ad79a3cb4136b676798e74560872 ";
+        private readonly string HockeyAppId = "fa39ad79a3cb4136b676798e74560872";
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
@@ -78,7 +78,7 @@ namespace Poof.iOS
             var hockeyManager = BITHockeyManager.SharedHockeyManager;
             hockeyManager.Configure(HockeyAppId);
 			hockeyManager.StartManager();
-			//hockeyManager.Authenticator.AuthenticateInstallation();
+			hockeyManager.Authenticator.AuthenticateInstallation();
 
             #endregion
 
