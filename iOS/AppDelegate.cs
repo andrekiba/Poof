@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using HockeyApp.iOS;
 using ImageCircle.Forms.Plugin.iOS;
-using Social;
 using UIKit;
 using Xamarin.Forms;
 
@@ -66,7 +61,7 @@ namespace Poof.iOS
 		    UIBarButtonItem.Appearance.SetTitleTextAttributes(new UITextAttributes
 		    {
 		     	//Font = UIFont.FromName("MarkerFelt-Thin", 18f),
-		     	TextColor = barTint
+		     	TextColor = back
 		    }, UIControlState.Normal);
 
 			//switch
@@ -82,7 +77,7 @@ namespace Poof.iOS
             var hockeyManager = BITHockeyManager.SharedHockeyManager;
             hockeyManager.Configure(HockeyAppId);
             hockeyManager.StartManager();
-            
+		    hockeyManager.Authenticator.AuthenticateInstallation();
 
             #endregion
 

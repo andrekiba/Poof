@@ -20,8 +20,8 @@ namespace Poof
 			tabbedNavigation.AddTab<PoofPageModel>("Poof", Device.OnPlatform("poofTab.png", "", ""));
 			tabbedNavigation.AddTab<PoofListPageModel>("Poofs", Device.OnPlatform("poofListTab.png", "", ""));
 
-            //tabbedNavigation.BarBackgroundColor = (Color)Resources[@"BarTint"];
-            //tabbedNavigation.BarTextColor = (Color)Resources[@"Tint"];
+			//tabbedNavigation.BarBackgroundColor = (Color)Resources[@"BarTint"];
+			//tabbedNavigation.BarTextColor = (Color)Resources[@"Back"];
 		    //tabbedNavigation.Title = "POOF";
             MainPage = tabbedNavigation;
 		}

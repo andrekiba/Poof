@@ -32,7 +32,7 @@ namespace Poof.iOS.Renderers
 					var tabItem = TabBar.Items[i];
 
 					UpdateItem(tabItem, tabs.Children[i].Icon);
-					//tabItem.Image = tabItem.Image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal);
+					tabItem.Image = tabItem.Image.ImageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal);
 				}
 			}
 		}

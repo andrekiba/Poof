@@ -15,9 +15,9 @@ namespace Poof.Droid
 	[Activity(Label = "Poof", Icon = "@drawable/poofBigRosa", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
-        private readonly string HockeyAppId = "f872a7aaf4914005892ef2b65fe18481 ";
+	    private const string HockeyAppId = "f872a7aaf4914005892ef2b65fe18481 ";
 
-        protected override void OnCreate(Bundle bundle)
+	    protected override void OnCreate(Bundle bundle)
 		{
 			TabLayoutResource = Resource.Layout.Tabbar;
 			ToolbarResource = Resource.Layout.Toolbar;
@@ -29,6 +29,8 @@ namespace Poof.Droid
             CrashManager.Register(this, HockeyAppId);
             // in your main activity OnCreate-method add:
             MetricsManager.Register(Application, HockeyAppId);
+
+            HockeyCheckUpdates();
 
             #endregion
 
@@ -67,5 +69,28 @@ namespace Poof.Droid
 
 			LoadApplication(new App());
 		}
-	}
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            UnregisterHockeyUpdateManager();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            UnregisterHockeyUpdateManager();
+        }
+
+        private void HockeyCheckUpdates()
+        {
+            // Remove this for store builds!
+            UpdateManager.Register(this, HockeyAppId);
+        }
+
+        private static void UnregisterHockeyUpdateManager()
+        {
+            UpdateManager.Unregister();
+        }
+    }
 }
