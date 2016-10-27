@@ -2,6 +2,7 @@
 using HockeyApp.iOS;
 using ImageCircle.Forms.Plugin.iOS;
 using UIKit;
+using Xamarin;
 using Xamarin.Forms;
 
 namespace Poof.iOS
@@ -76,8 +77,15 @@ namespace Poof.iOS
 
             var hockeyManager = BITHockeyManager.SharedHockeyManager;
             hockeyManager.Configure(HockeyAppId);
-            hockeyManager.StartManager();
-		    hockeyManager.Authenticator.AuthenticateInstallation();
+			hockeyManager.StartManager();
+			//hockeyManager.Authenticator.AuthenticateInstallation();
+
+            #endregion
+
+			#region Insights
+
+            Insights.Initialize("416420e0a779226dd8a0b72004d24af465e6a844");
+			Insights.ForceDataTransmission = true;
 
             #endregion
 
