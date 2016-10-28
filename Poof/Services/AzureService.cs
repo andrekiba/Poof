@@ -1,4 +1,4 @@
-﻿//#define AUTH
+﻿#define AUTH
 
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace Poof.Services
         #region Properties
 
         public MobileServiceClient Client { get; set; }
-        public static bool UseAuth { get; set; } = false;
+        public static bool UseAuth { get; set; } = true;
 		public static string DbPath { get; set; } = "syncstore2.db";
 
         #endregion
