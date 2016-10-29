@@ -17,7 +17,8 @@ namespace Poof.iOS
 			#region Colors
 
 			var tint = UIColor.FromRGB(65, 187, 195); //#41bbc3 acqua
-			var barTint = UIColor.FromRGB(230, 24, 115); //#e61873 magenta
+			//var barTint = UIColor.FromRGB(230, 24, 115); //#e61873 magenta
+			var barTint = UIColor.FromRGB(184, 24, 22); //#b818de viola
 			var back = UIColor.FromRGB(255, 255, 255); //ffffff bianco
 			var accent = UIColor.FromRGB(18, 113, 121); //#127179 verdone
             var jet = UIColor.FromRGB(107, 109, 118); //#6b6d76 grigio
